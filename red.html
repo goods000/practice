@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+*{margin:0px;padding: 0px;}
+.container{text-align: center;width: 100%;max-width: 960px;margin: 0 auto;padding: 15px 5px;
+    background-color: rgba(0,0,0,0.3);height: 100%;position: absolute;display: none;}
+.hongbao{height: 450px;background: #A5423A;width: 300px; left: 0;top: 0;border-radius: 10px;margin: 0 auto;}
+.topcontent{height: 280px;border: 1px solid #BD503A;background-color: #BD503A;
+    border-radius: 10px 10px 50% 50% / 10px 10px 15% 15%;
+    box-shadow: 0px 4px 0px -1px rgba(0,0,0,0.2);}
+.avatar{position: relative;}
+.avatar span{position: absolute;top: 10px;left: 15px;font-size: 2em;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);}
+#close{color: rgba(0,0,0,0.5);}
+.avatar img{border: 1px solid #BD503A;border-radius: 10px;overflow: hidden;margin-top: 10%;width: 50px; height: 50px;}
+.topcontent h2{margin-top: 15px ;font-size: 16px;margin-bottom: 0px;color: #fffab5;}
+.text{color: #fffab5;font-size: 13px;}
+.description{margin: 30px 0;font-size: 20px;font-weight: 600;color: #fffab5;}
+#chai{width: 100px;height: 100px;border: 1px solid #FFA73A;background-color: #FFA73A;border-radius: 50%;color: #fff;
+    font-size: 20px;display: inline-block;margin-top: -50px;box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.2);}
+#chai span{margin-top: 35px;display: inline-block;font-size: 40px;color: #000000;}
+.rotate{
+    -webkit-animation: anim .6s infinite alternate;
+    -ms-animation: anim .6s infinite alternate;
+    animation: anim .6s infinite alternate;
+}
+@-webkit-keyframes anim {
+    from { -webkit-transform: rotateY(180deg); }
+    to { -webkit-transform: rotateY(360deg); }
+}
+@-ms-keyframes anim {
+    from { -ms-transform: rotateY(180deg); }
+    to { -ms-transform: rotateY(360deg); }
+}
+@keyframes anim {
+    from { transform: rotateY(180deg); }
+    to { transform: rotateY(360deg); }
+}
+.mian{text-align: center;width: 100%;max-width: 960px;margin: 0 auto;padding: 15px 5px;
+    background-color: rgba(0,0,0,0.3);height: 100%;position: absolute;display: none;}
+</style>
+</head>
+
+<body>
+	<input type="button" id="btn" value="抢红包" />
+<div class="container" id="container">
+    <div class="hongbao">
+        <div class="topcontent">
+            <div class="avatar">
+                <span id="close">+</span>
+                <img src="http://img3.imgtn.bdimg.com/it/u=3287497184,4066980060&fm=214&gp=0.jpg">               
+            </div>
+            <h2>最值</h2>
+            <span class="text">给你发了一个红包</span>
+            <div class="description">恭喜发财，大吉大利</div>
+        </div>
+        <div class="chai" id="chai">
+            <span>開</span>
+        </div>
+    </div>
+</div>
+
+<div class="mian" id="mian">
+    <div class="hongbao">
+        <div class="topcontent">
+            <div class="avatar">
+                <span id="close_1">+</span>
+                <img src="http://img3.imgtn.bdimg.com/it/u=3287497184,4066980060&fm=214&gp=0.jpg">               
+            </div>
+            <h2>最值</h2>
+            <span class="text">给你发了一个红包</span>
+            <div class="description">恭喜发财，大吉大利</div>
+            <div class="description">88.88</div>
+        </div>
+    </div>
+</div>
+
+<script src="js/mui.min.js"></script>
+<script type="text/javascript">
+
+    mui.init()
+    var oBtn = document.getElementById("btn");
+    var oChai = document.getElementById("chai");
+	var oClose = document.getElementById("close");
+	var oContainer = document.getElementById("container");
+	var oClose_1 = document.getElementById("close_1");
+	var omian = document.getElementById("mian");
+	
+	oBtn.onclick = function (){
+	    oContainer.style.display = "block";
+	}
+	oChai.onclick = function (){
+	    oChai.setAttribute("class", "rotate");
+	    $(function () {
+		  setTimeout(function () {
+		    $("#container").hide();
+		  }, 3000);
+		});
+		$(function () {
+		  setTimeout(function () {
+		  	$("#mian").show();
+		  }, 3000);
+		});
+	}
+	oClose.onclick = function (){
+	    oContainer.style.display = "none";
+	}
+	oClose_1.onclick = function (){
+	    omian.style.display = "none";
+	}
+</script>
+</body>
+
+</html>

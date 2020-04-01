@@ -1,0 +1,102 @@
+<html>
+
+	<head>
+		<title>只弹出一次提示的弹出窗口</title>
+		<style>
+	    	.news{visibility:hidden;background: rgba(0,0,0,0.5);position: fixed;top: 0px;height: 100vh;width: 100vw;text-align: center;z-index: 999999;}
+		    .news .news_box{background: #fff;margin: 45% auto;width: 65%;padding: 5%;position: relative;border-radius: 8px;text-align: left;}
+		    .news .news_box img.gb{position: absolute;right: 10px;top:10px;width: 15%;}
+		    .news .news_box h1{font-size: 18px;text-align: center;}
+		    .news .news_box p:nth-child(3){text-align: left;}
+		    .news .news_box p:nth-child(4){text-indent: 2rem;word-break: break-all;margin-bottom: 5%;line-height: 22px;}
+	    </style>
+		<script language="JavaScript1.2">
+			var ie = document.all
+			var dom = document.getElementById
+			var ns4 = document.layers
+			var bouncelimit = 32 //(must be divisible by 8)
+			var curtop
+			var direction = "up"
+			var boxheight = ''
+
+			function initbox() {
+				if(!dom && !ie && !ns4)
+					return
+				crossobj = (dom) ? document.getElementById("dropin").style : ie ? document.all.dropin : document.dropin
+				scroll_top = (ie) ? document.body.scrollTop : window.pageYOffset
+				crossobj.top = scroll_top - 250
+				crossobj.visibility = (dom || ie) ? "visible" : "show"
+				dropstart = setInterval("dropin()", 50)
+			}
+
+			function dropin() {
+				scroll_top = (ie) ? document.body.scrollTop : window.pageYOffset
+				if(parseInt(crossobj.top) < 100 + scroll_top)
+					crossobj.top = parseInt(crossobj.top) + 40
+				else {
+					clearInterval(dropstart)
+					bouncestart = setInterval("bouncein()", 50)
+				}
+			}
+
+			function bouncein() {
+				crossobj.top = parseInt(crossobj.top) - bouncelimit
+				if(bouncelimit < 0)
+					bouncelimit += 8
+				bouncelimit = bouncelimit * -1
+				if(bouncelimit == 0) {
+					clearInterval(bouncestart)
+				}
+			}
+
+			function dismissbox() {
+				if(window.bouncestart) clearInterval(bouncestart)
+				crossobj.visibility = "hidden"
+			}
+
+			function get_cookie(Name) {
+				var search = Name + "="
+				var returnvalue = ""
+				if(document.cookie.length > 0) {
+					offset = document.cookie.indexOf(search)
+					if(offset != -1) {
+						offset += search.length
+						end = document.cookie.indexOf(";", offset)
+						if(end == -1)
+							end = document.cookie.length;
+						returnvalue = unescape(document.cookie.substring(offset, end))
+					}
+				}
+				return returnvalue;
+			}
+
+			function dropornot() {
+				if(get_cookie("droppedin") == "") {
+					window.onload = initbox
+					document.cookie = "droppedin=yes"
+				}
+			}
+			dropornot()
+		</script>
+
+	</head>
+
+	<body>
+		<div id="dropin"  class="news" style="position:absolute;visibility:hidden;left:250;top:100;width:500;height:300;background-color:#F5F5F5">
+			<!--<div align="right">
+				<a href="javascript:dismissbox()">[关闭窗口] </a>
+			</div>-->
+			<div class="news_box">
+	    		<a href="javascript:dismissbox()"><img src="img/gb.png" class="gb"/></a>
+	    		<h1>公告</h1>
+	    		<p>亲爱的各位家人：</p>
+	    		<p>为了保证家人们更简便的使用APP，提高APP操作体验感。
+				盘谷通证APP将于12月26日至2020年1月2日开始进行系统升级优化。
+				系统升级优化过程中，可能会出现一些延迟或服务器不稳定的情况，都属升级优化过程中会遇到的正常情况，谢谢大家的理解。
+				感谢大家对盘谷通证的支持。也 预祝大家新年快乐，阖家幸福。
+	    		</p>
+	    	</div>
+		</div>
+	</body>
+
+</html>

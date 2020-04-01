@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//js的组成:ECMAscript(核心)：js语言基础
+		//		  DOM(文档对象模型)：规定了访问HTML和XML的接口
+		//		  BOM(浏览器对象模型)：提供了浏览器窗口之间进行交互的对象和方法
+		
+		//js的基本数据类型:Undefined Null Number Boolean String
+		//object是所有对象的父对象:数据分装类对象(内置对象):Object Boolean Array Number String
+							//其他对象:Function Date Math Argument RegExp(正则表达式) Error
+							//ES6新增对象:Symbol Map Set Promises Proxy Reflect
+		
+		//js的基本代码规范
+		//  遵循严格模式："use strict";
+		//1.不要在同一行声明多个变量
+		//2.如果你不知道数组的长度，使用push
+		var s = [23,56456,234,5,67,3543,66,254,64];
+		console.log(s.push()); //9（数组的长度）
+		console.log(s.length); //9（数组的长度）
+		
+		//3.使用 ===/!== 来比较true/false或者数值
+		console.log(true === false); //false
+		console.log(true !== false); //true
+		
+		//4.对字符串使用单引号"(因为大多时候我们的字符串，特别html会出现)"
+		//5.使用对象字面量替代 new Array 这种形式(字面量表示如何表达这个值，一般除去表达式，给变量赋值时，等号右边都可以认为是字面量)
+			//字面量分为字符串字面量(string literal )、数组字面量(array literal)和对象字面量(object literal)，另外还有函数字面量(function literal)
+		var a = "hello word"; // "hello word"就是字面量   a就是变量名
+		 
+		//6.绝对不要在一个非函数块里声明一个函数，把那个函数赋给一个变量。浏览器允许你这么做，但是他们解析不同。
+		//7.不要使用全局函数
+		//8.总是使用var来声明变量，如果不这么做将导致产生全局变量，我们要避免污染全局命名空间
+		//9.Switch语句必须带有default分支
+		//10.使用/**...*/进行多行注释，包括描述，指定类型以及参数值和返回值
+		//11.函数不应该有时候有返回值，有时候没有返回值
+		//12.语句结束一定要加分号       for循环和if语句必须使用大括号	 for-in循环中的变量应该使用var关键字明确限定作用域，从而避免作用域污染
+		//13.避免单个字符名，让你的变量名有描述意义
+		//14.命名对象，函数和实例时使用驼峰命名规则
+		
+		//call和apply的作用:都可以实现继承或者转换对象指针的作用
+		//			 call:参数是罗列出来的，.call(对象[,参数1，参数2，...])此参数是指的对象的参数，非方法的参数
+		//			 apply:(对象，参数数组) 参数数组的形式:[参数1，参数2，...]
+		
+		//push()将新元素添加到一个数组中，并返回数组的新长度值。
+		//pop()移出数组中最后一个元素，并返回该元素。
+		//shift()移出数组中第一个元素，并返回该元素。
+		//unshift()将制定的元素插入数组开始位置，并返回改数组。
+		
+		//媒体查询(大于1024并小于1360屏幕的媒体查询关键CSS代码)
+		if ((screen.width == 1360) && (screen.height == 1024)) {
+			setActiveStyleSheet(CSS1);
+		}
+	
+		//js中this工作原理的理解
+		//1.在函数中:this通常是一个隐含的参数
+		//2.在函数外(顶级作用域中):在浏览器中this指的是全局对象；在Node.js中指的是模块(module)的导出(exports)
+		//3.传递到eval()中的字符串:如果eval()是被直接调用的，this值的事当前对象;如果eval()是被间接调用的,this就是指全局对象
+	
+		//DOM操作
+		//1.创建新节点
+		//	createDocumentFragment() //创建一个DOM片段
+		//  createElement()  //创建一个具体的元素
+		//  createTextNode() //创建一个文本节点
+		
+		//2.添加、移出、替换、插入
+		//appendChild()	   removeChild()	replaceChild()	  insertBefore() 在已有的子节点前插入一个新的子节点
+	
+		//3.查找
+		//	getElementsByTagName()  //通过标签名称
+		//  getElementsByName()		//通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包块id等于name的值)
+		//  getElementById()		//通过元素id，唯一性
+	
+	
+		//内存泄露：1.内存泄露指任何对象在您不再拥有或需要它之后任然存在
+				//2.垃圾回收器定期扫描对象，并计算引用了每个对象的其他对象的数量。如果一个对象是我引用数量为0(没有其他对象引用过该对象)，或对该对象的唯一引用是循环的，那么该对象的内存即可回收
+				//3.setTimeout的第一个参数使用字符串而非函数的话，会引起内存泄露
+				//4.闭包、控制台日志、循环(在两个对象彼此引用且彼此保留时，就会产生一个循环)
+	
+		//渐进增强:针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+		//优雅降级:一开始就构建完整的功能，然后再针对低版本浏览器进行兼容
+	
+		//同源策略:协议、域名、端口相同，同源策略是一种安全协议  指一段脚本只能读取来自同一来源的窗口和文档的属性
+		
+		//attribute是dom元素在文档中作为html标签拥有的属性
+		//property是dom元素在js中作为对象拥有的属性
+		
+		//window对象代表浏览器中打开的一个窗口
+		//document对象代表整个HTML文档
+		//实际上，document对象是window对象的对象属性
+	
+		//null,undefined的区别:null表示一个对象被定义了，但存放的是空指针。
+		//					  undefined表示这个值不存在    typeof(null) -object;
+		//											 typeof(undefined) -undefined;
+		
+		
+		//js代码中的"use strice"是什么意思？使用它区别是什么？
+		//use strict是一种ECMAscript 5添加的(严格)运行模式，这种模式使得js在更严格的条件下运行，使js编码更加规范化的模式，消除js语法的一些不合理、不严谨之处，减少一些怪异行为。
+		//目前支持的浏览器为IE10+，Firefox4+,Safari5.1+和Chrome.
+		//默认支持的糟糕特性都会被禁用，比如不能用with，也不能在意外的情况下给全局变量赋值全局变量的显示声明，函数必须声明在顶层，不允许在非函数代码块内声明函数，arguments.callee也不允许使用；
+		
+		
+		
+	</script>
+</html>

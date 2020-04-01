@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>canvas折线图</title>
+	</head>
+
+	<body>
+		<div id="container">
+			<canvas id="can">
+        你的浏览器不支持canvas，请升级浏览器
+    </canvas>
+		</div>
+		<script>
+			var canvas = document.getElementById('can');
+			var ctx = canvas.getContext('2d');
+			canvas.width = 800;
+			canvas.height = 600;
+			//   给定的点
+			nums = [268, 1236, 1273, 1545, 1988];
+			datas = ["11.1-11.2", "11.3-11.9", "11.10-11.16", "11.17-11.23", "11.24-11.30"];
+			//画出坐标线
+			function drawBorder() {
+				var arrowWidth = 10;
+				ctx.beginPath();
+				ctx.moveTo(100, 550);
+				ctx.lineTo(700, 550);
+				ctx.lineTo(700 - arrowWidth, 550 - arrowWidth);
+				ctx.lineTo(700, 550);
+				ctx.lineTo(700 - arrowWidth, 550 + arrowWidth);
+				ctx.stroke();
+				ctx.beginPath();
+				var arrowWidth = 10;
+				ctx.moveTo(100, 550);
+				ctx.lineTo(100, 10);
+				ctx.lineTo(100 - arrowWidth, 50 + arrowWidth);
+				ctx.lineTo(100, 10);
+				ctx.lineTo(100 + arrowWidth, 50 + arrowWidth);
+				ctx.stroke();
+			}
+			//画出折线
+			function drawLine() {
+				//因为5个点，只要画出4条折线，因此只需要nums.length-1;
+				for(var i = 0; i < nums.length - 1; i++) {
+					//起始坐标
+					var numsX = i * 100 + 150; //x坐标是从100起始的；x轴长500；将600坐标同等分为5份；；
+					var numsY = 550 - nums[i] / 5; //y坐标是从50起始的；y轴长500；从550开始同比例缩放5倍；
+					//终止坐标
+					var numsNx = (i + 1) * 100 + 150;
+					var numsNy = 550 - nums[i + 1] / 5;
+					ctx.beginPath();
+					ctx.moveTo(numsX, numsY);
+					ctx.lineTo(numsNx, numsNy);
+					ctx.lineWidth = 6;
+					ctx.strokeStyle = 'skyblue';
+					ctx.closePath();
+					ctx.stroke();
+				}
+			}
+			//绘制折线点的菱形和数值，横坐标值，纵坐标值
+			function drawBlock() {
+				for(var i = 0; i < nums.length; i++) {
+					var numsY = 550 - nums[i] / 5;
+					var numsX = i * 100 + 150;
+					ctx.beginPath();
+					// 画出折线上的方块
+					ctx.moveTo(numsX - 4, numsY);
+					ctx.lineTo(numsX, numsY - 4);
+					ctx.lineTo(numsX + 4, numsY);
+					ctx.lineTo(numsX, numsY + 4);
+					ctx.fill();
+					ctx.font = "15px scans-serif";
+					ctx.fillStyle = 'black';
+					// 画出折线上的方块完毕
+					//折线上的点值
+					var text = ctx.measureText(nums[i]);
+					ctx.fillText(nums[i], numsX - text.width, numsY - 10);
+					//绘制纵坐标
+					var colText = ctx.measureText((nums.length - i) * 500);
+					ctx.fillText((nums.length - i) * 500, 90 - colText.width, i * 100 + 55);
+					//绘制横坐标并判断
+					if(i < 5) {
+						var rowText = ctx.measureText(datas[i]);
+						ctx.fillText(datas[i], numsX - rowText.width / 2, 570);
+					} else if(i == 5) {
+						return;
+					}
+					ctx.closePath();
+					ctx.stroke();
+
+				}
+			}
+			drawBorder();
+			drawLine();
+			drawBlock();
+		</script>
+
+	</body>
+
+</html>

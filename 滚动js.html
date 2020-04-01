@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+    *{margin: 0;padding: 0;font: 14px "宋体";}
+    #container{
+        margin: 0 auto;
+        margin-top: 50px;
+        border: 3px solid #CCC;
+        border-radius: 6px; 
+        width:400px;
+    }
+    .title{
+        background: #A00;
+        opacity: 0.9;
+        height: 45px;
+        margin: 0;
+        border-radius: 4px 4px 0 0;
+        position: relative;
+        border-bottom: 5px solid #FFF; 
+    }
+    .title h2{
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        color:#FFF;
+        font: bold 18px "微软雅黑";
+        margin: 10px 0 0 30px;
+    }
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+    .title a{   
+        color:#FFF;
+        font: bold 14px "微软雅黑";
+        position: absolute;
+        bottom: 8px;
+        right: 5px;
+    }
+    .content{
+        border-radius: 0 0 5px 5px;
+        height: 150px;
+        overflow: hidden; 
+    }
+    ul,li{
+        list-style: none;
+    }
+    .content ul{
+        margin: 0 21px;
+        width: 350px;
+        /*border: 1px solid red;*/
+    }
+    .content span{
+        clear:both;
+        font:  12px "微软雅黑";
+        margin: 0;
+        float: right;
+    }
+    .content ul li{
+
+        margin-left: 10px;
+        padding-top: 8px;
+        overflow: hidden;
+
+    }
+    .content a{
+        font: bold 12px "微软雅黑" ;
+    }
+    .content a:hover{
+        color: red;
+        font: bold 12px "微软雅黑";
+    }
+</style>
+	</head>
+	<body>
+		<div id="container">
+	        <div class="title">
+	            <h2>慕课网最新课程</h2>
+	            <a href="#">更多>> </a>
+	        </div>
+	        <div  class="content" id="box">
+	            <ul >
+	                <li><a href="#">1.学会html5 绝对的屌丝逆袭</a><span>2017-08-07</span></li> 
+	                <li><a href="#">2.tob页面切换效果（案例）</a> <span>2017-08-12</span></li>
+	                <li><a href="#">3.圆角水晶按钮制作（案例）</a> <span>2017-06-01</span></li>
+	                <li><a href="#">4.HTML+CSS基础课程（系列）</a> <span>2017-07-07</span></li>
+	                <li><a href="#">5.分页制作（案例）</a><span>2017-08-07</span></li> 
+	                <li><a href="#">6.导航条菜单的制作（案例）</a> <span>2017-04-13</span></li>
+	                <li><a href="#">7.信息列表制作（案例）</a> <span>2017-08-19</span></li>
+	                <li><a href="#">8.下拉菜单制作（案例）</a> <span>2017-08-16</span></li>
+	                <li><a href="#">9.如何实现 “新手引导” 效果</a> <span>2017-08-18</span></li>
+	            </ul>
+	        </div>
+    	</div>
+	</body>
+	<script type="text/javascript">
+		var scrollCount = 2,//每次滚动的条数
+		    speed = 60, //滚动的速度
+		    displayCount = 6, //显示的条数
+		    delay = 2000;   //延迟时间
+		
+		var timer = null,
+		    timeout =  null;
+		    json =null;
+		var box = document.getElementById('box');
+		window.onload = function(){
+		    //复制出一份ul来填充,以达到无缝滚动
+		    box.innerHTML += box.innerHTML;
+		
+		    //获取li的高度
+		    liHeight = box.getElementsByTagName('li')[0].offsetHeight;
+		    //获取div的初始高度
+		    divHeight = box.offsetHeight;
+		    //如果设置显示的条数超出了初始div的高度,将其设置为能显示的最大条数。
+		    //显示的条数不能小于1
+		    if(displayCount*liHeight>divHeight || displayCount<1){
+		            displayCount = Math.floor(divHeight/liHeight); //默认值
+		    }
+		    //每次滚动的条数不能大于可见条数
+		    if(displayCount<scrollCount){
+		        scrollCount = displayCount;
+		    }
+		
+		    //根据显示的条数，设置显示区div的高度
+		    box.style.height = divHeight-(Math.floor(divHeight/liHeight)-displayCount)*liHeight +'px';
+		    //开始滚动
+		    setTimeout('startMove()',delay);
+		    //鼠标移入停止滚动
+		    box.onmouseover = function(){
+		        clearInterval(timer);
+		        clearTimeout(timeout);
+		    }
+		    //鼠标移出继续滚动
+		    box.onmouseout = function(){
+		        startMove();
+		    }
+		
+		}
+		
+		function startMove(){
+		    box.scrollTop++;
+		    timer = setInterval(function(){
+		        //每次滚动指定条数后间歇一段时间
+		        if(box.scrollTop % (scrollCount*24) == 0 ){
+		            clearInterval(timer);
+		            timeout = setTimeout('startMove()',delay);
+		        }else{
+		            box.scrollTop++;
+		            //当整个ul的内容显示完,让scrollTop回到初始状态
+		            if(box.scrollTop >=box.scrollHeight/2){
+		                box.scrollTop = 0;
+		            }
+		        }
+		    },speed);       
+		}
+	</script>
+
+</html>

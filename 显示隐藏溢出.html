@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="recharge">
+			<a class="recharge1" href="" target="_blank" rel="noopener noreferrer"></a>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//recharge充值系统
+		$('.recharge1').mouseover(function() {
+			$(this).addClass('recharge2').html('话费/加油卡充值  >>').stop(true, false).animate({
+				width: '175px'
+			}, 400);
+		}).mouseout(function() {
+			$(this).removeClass('recharge2').html('').stop(true, false).animate({
+				width: '48px'
+			}, 300);
+		})
+	</script>
+</html>

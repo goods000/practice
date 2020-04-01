@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>仿支付宝蚂蚁森林水滴浮动效果</title>
+		<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{margin: 0px;padding: 0px;}
+			body{background-image: url(img/bg.png);background-size: 100% 100%;background-repeat: no-repeat;height: 100vh;}
+			.box{}
+			.qiu{border-radius: 250px 250px 0 0;border: 1px solid;}
+			.qiu p{width: 30px;height: 30px;line-height: 30px;color: #2AC845;border-radius: 20px;border: 1px solid springgreen;text-align: center;
+			background: linear-gradient(to left,#fff,springgreen,#fff);position: relative;
+			animation:mymove 2s infinite;-webkit-animation:mymove 2s infinite;}
+			@keyframes mymove{from {top:0px;}to {top:10px;}}
+			@-webkit-keyframes mymove /*Safari and Chrome*/{from {top:0px;}to {top:10px;}}
+			.move{mymove 2s infinite !important;-webkit-animation: yi 4s infinite !important;position: relative;color: #fff !important;}
+			@keyframes yi{
+				from {top:0px;left: 0px;}
+				to {top:50vh;left: 50vw;opacity: 0}}
+			@-webkit-keyframes yi /*Safari and Chrome*/{
+				from {top:0px;left: 0%;}
+				to {top:50vh;left: 50vw;opacity: 0}}
+			.qiu p p{position: absolute;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<p class="qiu"></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var ch = "";
+		var list = [45,100,5,10,29,10,5,6,1,10];
+		for(var i =0; i<list.length; i++){
+			ch += '<p>' + list[i] + '</p>';
+			var a = Math.floor(Math.random() * 39 + 1) * 10;
+			var f = Math.floor(Math.random() * 39 + 1) * 10;
+			$(".qiu p").style.left = a + "px";
+			ch.style.top = f + "px";
+		}
+		$(".qiu").html(ch);
+//		$(".qiu p").click(function(){
+//			$(this).addClass("move");
+//			for (var j =0; j<list.length; j++) {
+//				console.log(list[j]);
+//				console.log(num);
+//				if (list[j] === num) {
+//					list.splice(j,1)
+//					console.log(list);
+//				} else{
+//					
+//				}
+//			}
+//		})
+	</script>
+</html>

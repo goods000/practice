@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>原型链的继承关系</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function SuperType(){
+			this.prototype = true;
+			this.name = "list";
+		}
+		
+		SuperType.prototype.getSuperValue = function(){
+			return this.property;
+		}
+		
+		function SubType(){
+			this.subproperty = false;
+		}
+		
+		//继承了 SuperType
+		SuperType.prototype.aa = '123';
+		SuperType.prototype = new SuperType();
+		SuperType.prototype.getSubValue = function(){
+			return this.subproperty;
+		};
+		console.log(SuperType.prototype.constructor)
+		var instance = new SuperType();
+		console.log(instance);
+		console.log(instance.getSuperValue()); //true
+		console.log(instance.getSubValue()); //false
+		console.log(instance.aa) //undefined
+		console.log(instance.name); //list
+		
+		var cc = new SuperType();
+		console.log(cc);
+		console.log(cc.getSuperValue()); //true
+		console.log(cc.getSubValue());  //报错
+		
+		
+		function FOO(){
+			this.rename = 'zhangsan'
+		}
+		FOO.rename = 'wangwu';
+		FOO.prototype.rename = 'list';
+		var c = new FOO();
+		console.log(c);
+	</script>
+</html>

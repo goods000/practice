@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>循坏数组赋值到input中</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{margin: auto;padding: 0px;color: #000;font-family: "microsoft yahei";list-style: none;text-decoration: none;}
+			input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
+			input,button{outline:none;-webkit-appearance: none;}
+			select{outline:none;}
+			a{-webkit-tap-highlight-color: rgba(255, 255, 255, 0);-webkit-user-select: none;-moz-user-focus: none;-moz-user-select: none;}
+			body{background: #f5f5f5;}
+			#box{display: none;width: 100%;height: 100%;position: fixed;overflow: auto;top: 0px;left: 0px;z-index: 1;
+			animation:my 3s;-moz-animation:my 3s; -o-animation:my 3s;-webkit-animation:my 3s;}
+			 @-webkit-keyframes my {
+			    0%    {bottom:-100vh;}
+			    100%  {bottom:0px;}
+			}         
+			.group{padding: 2% 5%;background: #fff;margin-bottom: 10px;}
+			.group span{width:50px;}
+			.group input{width:60%;border: 0;padding: 5px;}
+			.group select{width:60%;border: 0;padding: 5px;}
+			#btn{width: 90%;margin: 10% 5%;border-radius: 25px;background: #fff;text-align: center;padding: 3% 0;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="group">
+				<span>姓名:</span>
+				<input type="text" placeholder="请输入您的姓名" name="" id="username" value="" />
+			</div>
+			<div class="group">
+				<span>编号:</span>
+				<input type="text" readonly="readonly" placeholder="请输入您的编号" name="" id="id" value="" />
+			</div>
+			<div class="group">
+				<span>密码:</span>
+				<input type="password" placeholder="请输入您的密码"  name="" id="passowrd" value="" />
+			</div>
+			<div class="group">
+				<span>请选择:</span>
+				<select name="">
+					<option value="">请选择你要选择的选项</option>
+					<option value="">555</option>
+					<option value="">666</option>
+					<option value="">999</option>
+					<option value="">10000</option>
+				</select>
+			</div>
+			<div class="group">
+				<span>二级密码:</span>
+				<input type="password" placeholder="请输入您的二级密码"  name="" id="pay_passowrd" value="" />
+			</div>
+			
+			<p id="btn">
+				确认
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var arr = [45,67,12,28,89,100,44];
+		for (var i in arr) {
+			console.log(arr[i]);
+			console.log(i);
+			document.getElementById("id").value=arr[i];
+		}
+		
+		$(document).ready(function(){
+			$("#box").css("display","block");
+		})
+		
+//		$("#").click(function(){$("#btn").css("display","block");})
+	</script>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<script src="js/mui.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+	<style>
+		#ulData,li{
+			border-bottom: 5px solid gray;
+		}
+		#box{
+			line-height: 40px;
+			padding-left: 400px;
+			font-style: normal;
+		}
+		.tu{
+			position: relative;
+			top: -70px;
+			left: -50px;
+			z-index: 100;
+			color: red;
+			float: right;
+		}
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: orangered;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="color: white;">热卖专场</h1>
+		</header>
+		<div id="pullrefresh" class="mui-content" style="background-color: white; ">
+			<ul id="ulData">
+				<!-- <li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+						<div class="mui-media-body">
+							幸福
+							<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+						</div>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+	</body>
+	<script>
+		mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						style:'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto:true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+		
+		var page = 0;
+		var size = 6;
+		function getData(){
+			var url = "http://www.sssnjt.com/weixinGoods.do?p=remai";
+			var data = {page:page,size:size};
+			var callback = function(data){
+				var list = eval(data);
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(list.length<size);
+				for (var i=0;i<list.length;i++) {
+					var li = '<li class="mui-table-view-cell mui-media" onclick="a('+list[i].gid+')">'+
+						'<a href="javascript:;">'+
+							'<img class="mui-media-object mui-pull-left" src="http://www.sssnjt.com/'+list[i].gimages+'" style="width:150px;height:120px">'+
+							'<div class="mui-media-body" id="box">'+
+								'<p class=\'mui-ellipsis\'>'+list[i].gname+'</p>'+
+								'<span class=\'mui-ellipsis\' style="text-decoration: line-through;color:red">'+'￥'+list[i].gprice+'</span>&nbsp;&nbsp;'+
+								'<span style="color:red">'+'￥'+list[i].gvipprice.toFixed(2)+'</span>'+
+								'<p class=\'mui-ellipsis\'>\月销量&nbsp;'+list[i].yueXiaoliang+'</p>'+
+								'<span class="mui-icon-extra mui-icon-extra-cart mui-pull-right tu" onclick="tu('+list[i].gid+')"></span>'+
+							
+							'</div>'+
+						'</a>'+
+					'</li>';
+					$("#ulData").append(li);
+				}
+			}
+			$.post(url,data,callback);
+		}
+		// getData();
+		
+		function a(n){
+			alert("即将进入"+n+"号商品的详情");
+		}
+		function tu(n){
+			alert(n+"号商品加入购物车成功");
+			event.stopPropagation(); //防止冒泡事件
+		}
+		
+		//下拉刷新
+		function pulldownRefresh(){
+			window.setTimeout(function(){
+				page = 1;
+				$("#ulData").html("");
+				getData();
+				
+				//刷新后可以上拉加载
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				mui('#pullrefresh').pullRefresh().refresh(true);
+			},500);
+		}
+		
+		//上拉加载
+		function pullupRefresh(){
+			window.setTimeout(function(){
+				page++;
+				getData();
+			},500);
+		}
+	</script>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style>
+		 #map{
+		  width: 100%;
+		  height: 300px;
+		  background: #ccc;
+		  border: 5px solid blacks;
+		  margin: 0 auto;
+		  position: relative;}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+	</body>
+	<script>
+		 class Map{ //地图
+		  constructor(){
+		   this.mapEle = document.getElementById("map");
+		   this.w = this.mapEle.offsetWidth;
+		   this.h = this.mapEle.offsetHeight;
+		  }
+		 }
+		 class Food{ //食物
+		  constructor(){
+		   this.w = 20;
+		   this.h = 20;
+		   this.x = 0;
+		   this.y = 0;
+		   this.c = "orange";
+		   this.createEle();
+		  } 
+		  createEle(){
+		   this.foodEle = document.createElement("div");
+		   this.foodEle.style.cssText = `width:${this.w}px;height:${this.h}px;background:${this.c};position:absolute;left:${this.x * this.w}px;top:${this.y * this.h}px;border-radius: 40%;`;
+		   m.mapEle.appendChild(this.foodEle);
+		  }
+		  randomPos(){
+		   this.x = random(0,(m.w-this.w) / this.w);
+		   this.y = random(0,(m.h-this.h) / this.h);
+		   this.foodEle.style.left = this.x * this.w + "px";
+		   this.foodEle.style.top = this.y * this.h + "px";
+		  }
+		 }
+		 class Snake{ //身体
+		  constructor(){
+		   this.w = 20;
+		   this.h = 20;
+		   this.body = [{
+		     ele:null,x:4,y:3,c:randomColor()
+		   },{
+		    ele:null,x:3,y:3,c:randomColor()
+		   },{
+		    ele:null,x:2,y:3,c:randomColor()
+		   }];
+		   this.d = "right"; //设置默认行走方向
+		   this.createEle();
+		  }
+		  createEle(){
+		   for(var i=0;i<this.body.length;i++){
+		    if(!this.body[i].ele){
+		     this.body[i].ele = document.createElement("div");
+		     m.mapEle.appendChild(this.body[i].ele);
+		    }
+		    this.body[i].ele.style.cssText = `width:${this.w}px;height:${this.h}px;background:${this.body[i].c};position:absolute;left:${this.body[i].x * this.w}px;top:${this.body[i].y * this.h}px;color:#fff;border-radius: 40%;`;
+		   }
+		   this.body[0].ele.innerHTML = "00"
+		   setTimeout(()=>{this.move()},300);
+		  }
+		  move(){
+		   for(var i=this.body.length-1;i>0;i--){
+		    this.body[i].x = this.body[i-1].x;
+		    this.body[i].y = this.body[i-1].y;
+		   }
+		   switch(this.d){
+		    case "left":this.body[0].x -= 1;break;
+		    case "right":this.body[0].x += 1;break;
+		    case "top":this.body[0].y -= 1;break;
+		    case "bottom":this.body[0].y += 1;break;
+		   }
+		   if(this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x > ((m.w-this.w) / this.w) || this.body[0].y > ((m.h-this.h) / this.h)){
+		    alert("撞墙了");
+		    return;
+		   }
+		   if(this.body[0].x === f.x && this.body[0].y === f.y){
+		    this.body.push({ele:null,x:this.body[this.body.length-1].x,y:this.body[this.body.length-1].y,c:randomColor()});
+		    f.randomPos();
+		   }
+		   for(var i=1;i<this.body.length;i++){
+		    if(this.body[0].x == this.body[i].x && this.body[0].y == this.body[i].y){
+		     alert("撞到自己了");
+		     return;
+		    }
+		   }
+		   this.createEle();
+		  }
+		  direct(type){
+		   switch(type){
+		    case 37:
+		     if(this.d === "right") break;
+		     this.d = "left";break;
+		    case 38:
+		     if(this.d === "bottom") break;
+		     this.d = "top";break;
+		    case 39:
+		     if(this.d === "left") break;
+		     this.d = "right";break;
+		    case 40:
+		     if(this.d === "top") break;
+		     this.d = "bottom";break;
+		   }
+		  }
+		 }
+		 function random(a,b){
+		  return Math.round(Math.random()*(a-b)+b);
+		 }
+		 function randomColor(){
+		  return `rgb(${random(0,255)},${random(0,255)},${random(0,255)})`;
+		 }
+		
+		 var m = new Map();
+		
+		 var f = new Food();
+		 f.randomPos();
+		
+		 var s = new Snake();
+		 document.onkeydown = function(eve){
+		  var e = eve || window.event;
+		  var code = e.keyCode || e.which;
+		  s.direct(code);
+		 }
+		</script>
+</html>

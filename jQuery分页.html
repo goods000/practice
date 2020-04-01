@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
+		<title>jQuery分页</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			table{border-radius: 5px;width: 100%;}
+			table tr th{background: #993FFF;text-align: center;}
+			table tr td{background: #988CF2;text-align: center;}
+			#pagination{margin: 10px 0;}
+			#pagination .indexBtn:hover{background: #8A6DE9;}
+			#pagination .prevBtn:hover{background: #8A6DE9;}
+			#pagination .nextBtn:hover{background: #8A6DE9;}
+			#pagination .lastBtn:hover{background: #8A6DE9;}
+			#pagination .indexBtn{border:1px solid #E2E2E2;padding: 0 4px;}
+			#pagination .prevBtn{border:1px solid #E2E2E2;padding: 0 4px;}
+			#pagination .nextBtn{border:1px solid #E2E2E2;padding: 0 4px;}
+			#pagination .lastBtn{border:1px solid #E2E2E2;padding: 0 4px;}
+			#pagination #numPage{border:1px solid #E2E2E2;padding: 0 4px;}
+		</style>
+	</head>
+	<body>
+		<section>
+		    <table cellspacing="1" cellpadding="1">
+		        <tr><th>人物</th><th>装备</th></tr>
+		        <tbody id="tableInfo">
+			        <tr><td>雷声托尔</td><td>神锤</td></tr>
+			        <tr><td>钢铁侠</td><td>动力装甲</td></tr>
+			        <tr><td>蜘蛛侠</td><td>蜘蛛丝</td></tr>
+			        <tr><td>美国队长</td><td>盾牌</td></tr>
+			        <tr><td>绿巨人浩克</td><td>超人的力量</td></tr>
+			        <tr><td>金刚狼</td><td>艾德曼合金爪</td></tr>
+			        <tr><td>夜魔侠</td><td>Billy Club</td></tr>
+			        <tr><td>恶灵骑士</td><td>不死之术</td></tr>
+			        <tr><td>蚁人</td><td>“刺针”光枪</td></tr>
+			        <tr><td>万磁王</td><td>磁力</td></tr>
+			        <tr><td>蝙蝠侠</td><td>蝙蝠</td></tr>
+			        <tr><td>超级少女</td><td>超级</td></tr>
+			        <tr><td>蝙蝠女侠</td><td>蝙蝠</td></tr>
+			        <tr><td>超人</td><td>超人</td></tr>
+		        </tbody>
+		    </table>
+		    <div id="pagination">
+		        <a class="indexBtn" onclick="firstPage()">首页</a>
+		        <a class="prevBtn" onclick="prevPage()">上一页</a>
+		        <span id="pageAll"></span>
+		        <a class="nextBtn" onclick="pnextPage()">下一页</a>
+		        <a class="lastBtn" onclick="lastPage()">尾页</a>
+		      	<span id="numPage"></span>
+		    </div>
+		  </section>
+	</body>
+	<script type="text/javascript">
+		var tableInfo = document.getElementById("tableInfo");  // 获取table中的内容
+	    var totalRow = tableInfo.rows.length;  // 获取table行数
+	    //var cells = departmentsInfo.rows[0].cells.length;  // 获取列数
+	    var pagesize = 2;   // 每页两条
+	    var totalPage = Math.ceil(totalRow/pagesize);  // 计算出总页数=总条数/每页条数
+	    var currentPage;   // 当前页
+	    var startRow;
+	    var lastRow;
+	    var list;
+	
+	    // 定义一个换页的函数
+	    function pagination(i){
+	      currentPage = i;
+	      startRow = (currentPage-1)*pagesize;  //每页显示第一条数据的行数
+	      lastRow = currentPage*pagesize;  // 每页显示的最后一条数据的行数
+	      for (var i =1;i<totalPage; i++) {
+			list += '<span>' + i + '</span>';
+	      }
+	      document.getElementById("pageAll").innerHTML=list;
+	      document.getElementById("numPage").innerHTML="第"+currentPage+"页";
+	
+	      if(lastRow>totalRow){
+	           lastRow=totalRow;// 如果最后一页的最后一条数据显示的行数大于总条数，就让最后一条的行数等于总条数
+	      }
+	      //将数据遍历出来
+	      for(var i=0; i<totalRow; i++){
+	        var hrow = tableInfo.rows[i];
+	        if( i>=startRow && i<lastRow ){
+	          hrow.style.color="#000";
+	          hrow.style.display="table-row";   // 将循环出来的每一行信息作为一个tr显示到页面
+	        }else{
+	          hrow.style.display="none";
+	        }
+	      }
+	    }
+	
+	    $(function(){ firstPage(); });
+	    
+	    function firstPage(){
+	      var i = 1;
+	      pagination(i);
+	    }
+	    function prevPage(){
+	      var i= currentPage-1;
+	      if(i<1) i=currentPage;
+	      pagination(i);
+	    }
+	    function pnextPage(){
+	      var i= currentPage+1;
+	      if(i>totalPage) i= currentPage;
+	      pagination(i);
+	    }
+	    function lastPage(){
+	      var i = totalPage;
+	      pagination(i);
+	      $(".lastBtn").attr({"disabled":"disabled"},{"background":"#3fffd44a"});
+	    }
+	</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>盒子中产生不同颜色方块</title>
+		<style>
+			* {padding: 0;margin: 0;list-style: none;box-sizing: border-box;}
+			#rect {width: 400px;height: 400px;margin: 100px auto;background: #000;} 
+			ul {width: 400px;height: 400px;overflow: hidden;}
+			li {position: absolute;width: 10px;height: 10px;background: #f00;float: left;}
+		</style>
+	</head>
+	<body>
+		<div id="rect">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function init() {
+			// 1.0获取所有的li元素
+			var li = document.getElementsByTagName("li");
+			// 2.0利用for循环遍历小格子，循环里面进行逻辑代码编写
+			for (let i = 0; i < li.length; i++) {
+			// 2.1声明变量为产生10-390之间的数（这里是因为我自己设置大盒子width为400，height为400）
+			var a = Math.floor(Math.random() * 39 + 1) * 10;
+			var f = Math.floor(Math.random() * 39 + 1) * 10;
+			// 2.2颜色变量rgba在0~255之间，所以随机数设置为0~255
+			var b = Math.floor(Math.random() * 255);
+			var c = Math.floor(Math.random() * 255);
+			var d = Math.floor(Math.random() * 255);
+			// 透明度设置0~1
+			var e = Math.random();
+			// console.log(a); // console.log(b);
+			li[i].style.marginLeft = a + "px";
+			li[i].style.marginTop = f + "px";
+			// 随机透明度（随机透明度）
+			// li[i].style.backgroundColor = "rgba(" + b + "," + c + "," + d + "," + e + ")";
+			// 固定透明度（透明度设置1）
+			li[i].style.backgroundColor = "rgba(" + b + "," + c + "," + d + "," + 1 + ")";
+			}
+		}
+		// 定时器设置每个500毫秒就进行加载init()一次
+		setInterval(() => {
+		init();
+		}, 5000);
+		init();
+	</script>
+</html>

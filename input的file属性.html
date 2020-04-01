@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		#main{text-align: center;}
+		#my_img{max-width: 80%;}
+		#img_upload{display: none;}
+	</style>
+	<body>
+		<!--<div class="main">
+			<img src="img/chuan.png" id="my_img"/>
+			<input type="file" name="" id="img_upload" value="" />
+		</div>-->
+		<div id="xmTanDiv_1" class="touImg">
+          	<form>
+				<input type="hidden" id="uploadOrderid" name="id" value="">
+				<input type="file" name="file1" id="xdaTanFileImg_1" onchange="preview(this)" accept="image/*" />
+				<i>
+			    	<img src="img/chuan.png" onerror="this.src='img/chuan.png'" id="xmTanImg_1"/>
+        		</i>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#my_img").click(function(){
+				$("up_img").click();
+			})
+		})
+//		 function preview(file) {
+//      var animateimg = $(file).val(); //获取上传的图片名 带//
+//      var imgarr=animateimg.split('\\'); //分割
+//      var myimg=imgarr[imgarr.length-1]; //去掉 // 获取图片名
+//      var houzui = myimg.lastIndexOf('.'); //获取 . 出现的位置
+//      var ext = myimg.substring(houzui, myimg.length).toUpperCase();  //切割 . 获取文件后缀
+//      var parent=$(file).prev();
+//      var file = $(file).get(0).files[0]; //获取上传的文件
+//      var fileSize = file.size;           //获取上传的文件大小
+//      var maxSize = 20971520;              //最大1MB
+//
+//      if(ext !='.PNG' && ext !='.GIF' && ext !='.JPG' && ext !='.JPEG'){
+//          layer.msg("文件类型错误,请上传图片类型", { icon: 2,time: 2000});
+//          return false;
+//      }else if(parseInt(fileSize) >= parseInt(maxSize)){
+//          layer.msg("上传的文件不能超过1MB", { icon: 2,time: 2000});
+//          return false;
+//      }else{
+//          var data = new FormData($('form')[0]);
+//          console.log(data);
+//           $('#xmTanImg_1').attr('src',file.imgUrl)
+//      }
+//  }
+	function preview(file) {
+	        var file = file.files[0];
+			console.log(file);
+			console.log("file.size = " + file.size); //file.size 单位为byte
+			var reader = new FileReader();
+			reader.onload = function (e) {
+			console.log("成功读取....");
+			var size = file.size/1024;
+			var size = size/1024;
+			if (size>4) {
+			alert('上传图片不能超过4MB，请重新选择!');return false;
+			}
+			var img = document.getElementById("xmTanImg_1");
+			img.src = e.target.result;
+			//或者 img.src = this.result; //e.target == this
+			}
+			reader.readAsDataURL(file)
+		}
+
+	</script>
+</html>

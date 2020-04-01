@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta charset="UTF-8" />
+    <title>三角形</title>
+    <style>
+        div{
+            width:0;height:0;
+            border: 20px solid;
+            /*平分效果*/
+            border-color:red green blue black;
+            /*单个三角形*/
+            /*border-color:transparent transparent lightgreen transparent;*/
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script type="text/javascript">
+	function randomInt( min,max ){
+	    if( min>max ){var t=min;min=max;max=t;}
+	    return Math.floor(   Math.random()*( max-min+1 )+min  )  
+	    console.log(Math.floor(   Math.random()*( max-min+1 )+min  )  )
+	}
+</script>
+</html>

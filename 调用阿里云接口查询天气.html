@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1>查询的天气</h1>
+		<dl>
+			<dt>城市:<strong id="city">深圳</strong></dt>
+			<dd>白天天气:<strong id="day_weather"></strong>---夜晚天气<strong id="night_weather"></strong></dd>
+			<dd>白天:<img src="" id="img"/>---夜晚:<img src="" id="img1"></dd>
+			<dd>风力:<strong id="win"></strong></dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+		var city = $("#city").html();
+		var day_weather = $("#day_weather").html();
+		var night_weather = $("#night_weather").html();
+		var img = $("#img").src;
+		var img1 = $("#img1").src;
+		var win = $("#win").html();
+		$(document).ready(function(){
+			console.log("方法执行中。。。")
+			$.ajax({
+				type:"get",
+				url:"http://tinaqi.market.alicloudapi.com/area-to-id?area=city",
+				header:'Authorization:APPCODE a88603fdadfd45a5a288a1dc155b2552',
+				dataType: "JSON",
+				async:true,
+				data:{
+					area:city,
+					day_weather:day_weather,
+					night_weather:night_weather,
+					day_weather_pic:img,
+					day_weather_pic:img1,
+					day_wind_power:win
+				},
+				success:function(data){
+					$("#city").html();
+					console.log(data);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		})
+		
+	</script>
+</html>

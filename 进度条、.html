@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>进度条</title>
+    <style>
+        .progress {
+            width: 100%;
+            height: 20px;
+            border-radius: 30px;
+            border: 1px solid #eeeeee;
+            overflow: hidden;
+            margin: 20% auto;
+        }
+        input {
+            width: 150px;
+        }
+        .progress span{
+            height: 20px;
+            /*background-color: greenyellow;*/
+           background-size: 25px 35px;
+           background-image: linear-gradient(-60deg,black 0,black 25%,white 0,white 50%,black 0,black 75%,white 0,white 100%);
+            display: block;
+            width: 0;
+            line-height: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<input type="number" min="0" max="20000" id="input">
+<div class="progress">
+    <span>325</span>
+</div>
+<script>
+    ~function (document) {
+        var input = document.getElementById('input');
+        var progress = document.getElementsByClassName('progress')[0];
+        var span = progress.getElementsByTagName('span')[0];
+ 
+        input.addEventListener('input', function () {
+//          span.style.width = span.textContent =  this.value + '%';
+            span.style.width = span.textContent =  ((this.value) / 100).toFixed(1) + '%';
+        }, false)
+    }(document)
+    
+</script>
+</body>
+</html>

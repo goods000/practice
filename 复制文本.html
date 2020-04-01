@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>复制文本</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		.copy{color: #1E9FFF;text-decoration: underline;margin-left: 0.6rem;}
+	</style>
+	<body>
+		<div class="box">
+			<span class="box_name">邀请码:</span>
+			<span id="v_code">z154188</span>
+			<span class="copy"  data-clipboard-target="#v_code">复制</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+	// 复制
+	var clipboard=new Clipboard(".copy");
+	clipboard.on("success",function(e){
+		layer.msg("复制成功",{ icon: 1,time: 2000});
+	})
+	</script>
+</html>

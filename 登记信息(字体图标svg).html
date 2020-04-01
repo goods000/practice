@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>信息登记(字体图标svg)</title>
+		<script src="js/font.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<!--Symbol 引用(字体图标的使用)-->
+	<style>
+	.iconfont {width: 2em;height: 2em;vertical-align: -0.5em;fill: currentColor;overflow: hidden;}
+	</style>
+	<style type="text/css">
+		*{margin: 0px auto;padding: 0px;font-size: 14px;color: #000;}
+		input,button,select{outline:none;-webkit-appearance: none;}
+		body{background: #f5f5f5;}
+		.h1{text-align: center;font-weight: 500;font-size: 16px;font-family: "微软雅黑";color:#fff;padding:10px 0;background: orange;}
+		.h1 s{font-size: 18px;color: #fff;}
+		.h1 a{position: absolute;font-size: 14px;right: 10px;top:15px;}
+		.h1 a span{color: #fff;font-size: 14px;}
+		.h1 button{position: absolute;top:10px;left: 10px;background: none;border: 0px;font-size: 20px;color: #fff;}
+		.div{margin-top: 5%;}
+		.group{text-align: center;margin: 10px;}
+		.group label{width: 15%;}
+		.group input{width: 80%;border: 0px;padding: 10px 10px;background-color: #fff;border-radius: 5px;}
+		#btn{width: 90%;background: orange;padding: 10px;border: 0px;border-radius: 5px;margin-left: 5%;margin-top:10%;color: #fff;}
+		#J_getCode{width: 22%;height:44px;display: block;position: absolute;margin-top:-40px;right:10%;line-height: 44px;color:orange;}
+		#J_resetCode{display:none;width:20%;height:44px;position: absolute;margin-top:-5px;right:10%;line-height: 44px;font-size: 12px;color:orange;}
+		#J_second{color: orange;font-size:12px;}
+	</style>
+	<body>
+		<h1 class="h1">信息登记</h1>
+		<div class="div">
+			<form action="" method="post">
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-wode"></use>
+					</svg>
+					<input type="text" id="username" value="" placeholder="请输入账号" />
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-shouji"></use>
+					</svg>
+					<input type="text" id="phone" value="" placeholder="请输入手机号" />
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-yanzhengma"></use>
+					</svg>
+					<input type="text" id="code" value="" placeholder="请输入验证码" />
+					<a value="获取验证码" onclick="getCode(this)" id="J_getCode" />获取验证码</a>
+					<a id="J_resetCode">
+						<span id="J_second">60</span>秒后重发
+					</a>
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-icon-test"></use>
+					</svg>
+					<input type="text" id="passowrd" value="" placeholder="请输入密码" />
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-mima"></use>
+					</svg>
+					<input type="text" id="confir_password" value="" placeholder="请确认密码" />
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-dizhi"></use>
+					</svg>
+					<input type="text" id="address" value="" placeholder="请输入地址" />
+				</div>
+				<div class="group">
+					<svg class="iconfont" aria-hidden="true">
+						<use xlink:href="#icon-weibiaoti-"></use>
+					</svg>
+					<input type="text" id="int" value="" placeholder="请输入邀请人" />
+				</div>
+				<input type="submit" id="btn" value="确定"/>
+			</form>
+		</div>
+	</body>
+<script type="text/javascript">
+	//获取验证码
+	function getCode(){
+		var phone = $("#phone").val();
+		var pattern = /^1[0-9]{10}$/;
+		var isPhone = 1;
+		if (phone== '') {
+			layer.msg("请输入手机号", { icon: 2,time: 2000});
+            return false;
+            isPhone = 0;
+		}
+		else if(!pattern.test(phone)) {
+			layer.msg("请输入正确手机号", { icon: 2,time: 2000});
+            return false;
+            isPhone = 0;
+		}else{
+			if (isPhone) {
+				$('#J_getCode').hide();
+				$('#J_second').html('60');
+				$('#J_resetCode').show();
+				var second = 60;
+				var timer = null;
+				timer = setInterval(function(){
+					second -= 1;
+					if(second >0 ){
+						$('#J_second').html(second);
+					}else{
+						clearInterval(timer);
+						$('#J_getCode').show();
+						$('#J_resetCode').hide();
+					}
+				},1000);
+			} else{
+				$('#phone').focus();
+			}
+		}
+	}
+</script>	
+</html>

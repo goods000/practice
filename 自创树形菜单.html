@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>自创树形菜单</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<style type="text/css">
+			.start{display: none;}
+		</style>
+		<ul>
+			<li class="array">家用电器
+				<ul class="start">
+					<li>电视</li>
+					<li>电脑</li>
+					<li>冰箱</li>
+				</ul>
+			</li>
+			<li class="array">手机专场
+				<ul class="start">
+					<li>iPhone</li>
+					<li>华为</li>
+					<li>VIVO</li>
+				</ul>
+			</li>
+			<li class="array">服装服饰
+				<ul class="start">
+					<li>衣服</li>
+					<li>裤子</li>
+					<li>鞋子</li>
+				</ul>
+			</li>
+			<li class="array">食材配菜
+				<ul class="start">
+					<li>肉类</li>
+					<li>蔬菜类</li>
+					<li>海鲜类</li>
+				</ul>
+			</li>
+		</ul>
+		<script type="text/javascript">
+			$(".array").click(function(){
+				$(this).children().toggle();
+			})
+		</script>
+		<style type="text/css">
+			h1, h2, h3, h4, h5, h6
+			{
+			voice-family: male;
+			richness: 80;
+			cue-before: url("beep.au")
+			}
+			.group{background-color:rgba(225,225,225,0.5);padding: 10%;border-radius: 15px;}
+			.group p{height:25px;line-height:25px;background-color:rgba(255,255,255,0.7);border-radius: 6px;}
+		</style>
+		<div class="group">
+			<label>验证码</label>
+			<p id="p">
+				请输入验证码
+			</p>
+		</div>
+		<h1>我是h1标签</h1>
+		<h2>我是h2标签</h2>
+		<h3>我是h3标签</h3>
+		<h4>我是h4标签</h4>
+		<h5>我是h5标签</h5>
+		<h6>我是h6标签</h6>
+	</body>
+	<script type="text/javascript">
+		$("#p").click(function(){
+			$(this).html("");
+			if($(this).html("")) {
+				console.log(123)
+				$(this).innerHTML="<input type='text' value='' />";
+			}
+		})
+	</script>
+</html>

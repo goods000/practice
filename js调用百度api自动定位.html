@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport"
+        content="width = device-width, initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable = no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href="<%=request.getContextPath() %>/css/wx/map/changelocation.css" rel="stylesheet"></head>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wDYEcxgRRheZwyC9jpN1Tt7fzr2zjosZ"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <style type="text/css">
+        #r-result{width:100%;}
+    </style>
+
+<title>紧急求救</title>
+</head>
+<body>
+
+    <div class="tell">
+        <div class="dianhua">
+            <p class="dh"><span>电话</span></p>
+        </div>
+        <div class="hujiu">
+            <p><img src="<%=request.getContextPath() %>/css/wx/map/redTelephone.png" width="85" height="85"></p>
+        </div>
+    </div>
+
+    <div id="app">
+        <div data-v-de1b2cde="">
+            <div data-v-02dc3e6e="" data-v-de1b2cde="" class="location-panel">  
+                <div data-v-8c280b04="" data-v-02dc3e6e="" class="location-current">
+                    <h3 data-v-8c280b04="" style="margin-left: 35px;margin-bottom: 5px">定位地址</h3> 
+                    <div id="allmap" style="width: 100%;height: 260px;border: 1px solid #cccccc"></div>
+
+                </div>
+                <div data-v-1e335761="" data-v-02dc3e6e="" class="location-service">
+                    <h3 data-v-1e335761="" style="margin-left: 35px;margin-bottom: 5px">
+                        服务地址&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a οnclick="refresh()">点击可刷新</a>
+                        <!-- <input type="button" value="点击可刷新" οnclick="refresh()"/> -->
+                    </h3>
+                    <div id="r-result">
+                    </div>
+                </div> 
+
+                <div class="tell">
+                    <div class="dianhua" style="width: 60%">
+                        <%-- <p class="srrm">120电话</p>
+                        <p class="dh"><img src="<%=request.getContextPath() %>/css/wx/map/telefono.png"><span>0319-8800999</span></p> --%>
+                        <p class="dh"><span>电话</span></p>
+                    </div>
+                    <div class="hujiu">
+                        <p><a id="h_tep" href="tel:0319-8800999" οnclick="add()" style="color: #FFF">一键呼救</a></p>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div> 
+
+    </div>
+
+<script type="text/javascript">
+    //定位成功事件
+    //var myKeys=[];
+    var myKeys='';
+    var lng='';         //精度
+    var lat='';         //纬度
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(108.95,34.27);
+    map.centerAndZoom(point,12);
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){console.log(r.point)
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);//标出所在地
+            map.panTo(r.point);//地图中心移动
+            //alert('您的位置：'+r.point.lng+','+r.point.lat);
+            lng=r.point.lng;
+            lat=r.point.lat;
+            var point = new BMap.Point(r.point.lng,r.point.lat);    //用所定位的经纬度查找所在地省市街道等信息
+            var gc = new BMap.Geocoder();
+            gc.getLocation(point, function(rs){
+               var addComp = rs.addressComponents;
+               console.log(rs.address);//地址信息
+               //myKeys = [rs.address];     当有其他信息时，可以定义成数组
+                myKeys = rs.address;
+               //alert(myKeys);         //弹出所在地址
+               var local = new BMap.LocalSearch(map, {
+                   renderOptions:{map:map,panel:"r-result"},
+                   pageCapacity:3
+                });
+                local.searchInBounds(myKeys, map.getBounds());
+            });
+        }else {
+            alert('failed'+this.getStatus());
+        }        
+    },{enableHighAccuracy: true})
+
+    /**
+     * 保存
+     */
+    function add(){
+    //alert(myKeys);
+      $.ajax({
+            type: 'GET',
+            url: '<%=request.getContextPath()%>/customer/map/save',
+            dataType: 'json',
+            data: {'address':myKeys,'lng':lng,'lat':lat},   
+            success : function(res){
+                // 添加文字说明
+                alert(res);
+            }         
+
+      }); 
+  }   
+
+    //实时刷新
+    function refresh(){
+        window.location.href="<%=request.getContextPath()%>/customer/map/index";
+    }
+
+</script>
+
+</body>
+</html>

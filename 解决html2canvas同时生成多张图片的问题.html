@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<style>
+		body{overflow-x:auto;overflow-y:hidden;height:100vh;background: none !important;}
+			.invite{width: 100vw;
+			height: 100vh;overflow: hidden;}
+			.invite .p{text-align: center;margin-top: 1rem;}
+			.invite .user{font-size:1.2rem;color:#fff;margin-top: 0.5rem; text-align: center; }
+			.invite  .touxiang{width: 50px;height: 50px;border-radius: 100%; vertical-align: middle;margin-right: 0rem;}
+			.qrcode{width: 30%;height: 100px;text-align: center;margin: 0 auto;padding: 5px;
+    background: #fff;border: 3px solid #eed7ff;    border-radius: 10px;  
+	position: absolute; bottom: 1rem; left: 35%; }
+	.swiper-container{margin-top: 0;}
+	.swiper-slide{width: 100vw;}
+	.swiper-slide img{width: 100vw;height: 100%;}
+	.swiper-wrapper{display: flex;}
+	.copyDom{position: absolute;top: 0;left: 0;z-index: 1;}
+	.back{position: fixed;top: 1rem;left: 1rem;color: #fff;z-index: 6666;}
+	 .back img {width: 1.4rem;vertical-align: middle;}
+	 
+	 .flexslider{width: 100%;position:relative;overflow:hidden;background:url(img/loading.gif) 50% no-repeat;}
+.slides{position:relative;z-index:1;}
+/*.slides li{height:400px;}*/
+.slides img{width: 100%;height: 100%;}
+.flex-control-nav{position:absolute;bottom:10px;z-index:2;width:100%;text-align:center;}
+.flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
+.flex-control-nav .flex-active{background-position:0 0;}
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
+	.flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(img/dot.png) right 0 no-repeat;cursor:pointer;}
+.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+		</style>
+	</head>
+	<body>
+		 <div class="swiper-container">
+		    <div class="swiper-wrapper">
+		      <div class="swiper-slide">
+		      	<div class="invite" style="background:url(img/share_bg.png)  no-repeat;background-size: 100% 100%;">
+					<p class="p">
+						<img src="img/touxiang.png" class="touxiang"/>
+					</p>
+					<p class="user">我是湛山</p>
+					<p class="qrcode"></p>
+				</div>
+		      </div>
+		       <div class="swiper-slide">
+		      	<div class="invite" style="background:url(img/11.jpg)  no-repeat;background-size: 100% 100%;">
+					<p class="p">
+						<img src="img/see.png" class="touxiang"/>
+					</p>
+					<p class="user">我是湛山</p>
+					<p class="qrcode"></p>
+				</div>
+		      </div>
+		      <div class="swiper-slide">
+		      	<div class="invite" style="background:url(img/22.jpg)  no-repeat;background-size: 100% 100%;">
+					<p class="p">
+						<img src="img/see.png" class="touxiang"/>
+					</p>
+					<p class="user">我是湛山</p>
+					<p class="qrcode"></p>
+				</div>
+		      </div>
+		    </div>
+			<!--<div class="swiper-pagination"></div>-->
+		  </div>
+		  
+		  <div class="flexslider" id="show_flexslider" style="z-index: 666;position: absolute; top: 0;">
+				<ul class="slides">
+					<li><img src="" class="img0" /></li>
+					<li><img src="" class="img1" /></li>
+					<li><img src="" class="img2" /></li>
+				</ul>
+			</div>
+		
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.flexslider').flexslider({
+				directionNav: true,
+				pauseOnAction: false
+			});
+		});
+	</script>	
+		  
+		<!-- <a class="down" href="" download="downImg">保存图片</a> -->
+		
+		<!--创建出一个一样的element ，全部为可视状态，在进行截图  就行了-->
+		<div class="copyDom copyDom0">
+		</div>
+		<div class="copyDom copyDom1">
+		</div>
+		<div class="copyDom copyDom2">
+		</div>
+		
+		
+		<img src="img/logo.png" id="logo" />
+		<script src="layer/layer.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script>
+		    var swiper = new Swiper('.banner .swiper-container', {
+//		    	pagination: {
+//				    el: '.swiper-pagination',
+//				  },
+			    autoplay: false,//自动播放
+		    });
+		    
+		 </script>
+		<script>
+				//复制邀请的部分,让它在可视去,能生成图片
+		 for(var i=0;i<$('.invite').length;i++){
+	    	$(".copyDom"+i).append($(".invite").eq(i).eq(0).clone());
+	    	
+	    }
+		// 复制好之后,移除元素
+		 $(".swiper-container").eq(0).remove();  
+		 
+		var path="192.168.0.1?uid=123";
+		$("#addr").val(path);
+		jQuery('.qrcode').qrcode({
+				render: "canvas", //也可以替换为table
+				width: 80,
+				height: 80,
+				text: path
+			});
+
+			$('canvas').css({
+				'width': '100%',
+				"height": "100%"
+			});
+	
+			//带logo
+			var width = 134;                                                                      
+		    var height = 134;                                                                     
+		    var x = width * 0.2;                                                                  
+		    var y = height * 0.2;                                                                 
+		    var lx = width * 0.2;                                                                 
+		    var ly = height * 0.2; 
+			$(".qrcode").eq(0).find("canvas")[0].getContext('2d').drawImage($("#logo")[0], x, y, lx, ly);
+			$(".qrcode").eq(1).find("canvas")[0].getContext('2d').drawImage($("#logo")[0], x, y, lx, ly);
+			$(".qrcode").eq(2).find("canvas")[0].getContext('2d').drawImage($("#logo")[0], x, y, lx, ly);
+			
+			//适应图片，让二维码始终是正方形
+				var w=$(".qrcode").width();
+			//	console.log(w)
+				$(".qrcode").height(w);
+			
+		</script>
+		
+		<script src="js/html2canvas.min.js"></script>
+		<!--保存图片-->
+		<script>
+		
+    //直接选择要截图的dom，就能截图，但是因为canvas的原因，生成的图片模糊
+    //html2canvas(document.querySelector('div')).then(function(canvas) {
+    //    document.body.appendChild(canvas);
+    //});
+    		 //调用方法,截图
+    for(var i=0;i<$('.copyDom').length;i++){
+    	creatImg($('.copyDom').eq(i),i);
+    	console.log()
+    }
+     function creatImg(obj,i){
+    	console.log(i)
+    	 canvas=false
+    	//创建一个新的canvas
+	    var canvas2 = document.createElement("canvas");
+	   
+	    let _canvas=obj[0];
+	//  _canvas = document.querySelector('.invite');
+	    var w = parseInt(window.getComputedStyle(_canvas).width);
+	    var h = parseInt(window.getComputedStyle(_canvas).height);
+	    //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+	    canvas2.width = w * 2;
+	    canvas2.height = h * 2;
+	    canvas2.style.width = w + "px";
+	    canvas2.style.height = h + "px";
+	    //可以按照自己的需求，对context的参数修改,translate指的是偏移量
+	    //  var context = canvas.getContext("2d");
+	    //  context.translate(0,0);
+	    var context = canvas2.getContext("2d");
+	    context.scale(2, 2);
+	    html2canvas(obj[0], { canvas: canvas2 }).then(function(canvas) {
+	        //document.body.appendChild(canvas);
+	        //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+	        //document.querySelector(".down").setAttribute('href', canvas.toDataURL());
+	        $(".img"+i).attr('src', canvas.toDataURL());
+	     //    console.log(canvas)
+	     //   obj.remove();
+	      
+			var imgCxt = canvas.toDataURL();
+			
+			
+	    });
+    }
+
+   
+</script>
+
+		
+	</body>
+</html>
+

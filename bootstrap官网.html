@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		 
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		 
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	</head>
+	<body>
+			<nav class="navbar navbar-inverse" role="navigation">
+			    <div class="container-fluid">
+			    <div class="navbar-header">
+			    	<button type="button" class="navbar-toggle" data-toggle="collapse"
+			                data-target="#navbarNav">
+			            <span class="sr-only">切换导航</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			        </button>
+			        <a class="navbar-brand" href="#">balabala</a>
+			    </div>
+			    <div class="collapse navbar-collapse" id="navbarNav">
+			        <ul class="nav navbar-nav">
+			            <li class="active"><a href="#">首页</a></li>
+			            <li><a href="#">商城</a></li>
+			            <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			                    	设置
+			                    <b class="caret"></b>
+			                </a>
+			                <ul class="dropdown-menu">
+			                    <li><a href="#">账号管理</a></li>
+			                    <li><a href="#">地址管理</a></li>
+			                    <li><a href="#">团队管理</a></li>
+			                    <li class="divider"></li>
+			                    <li><a href="#">我的好友</a></li>
+			                    <li class="divider"></li>
+			                    <li><a href="#">系统消息</a></li>
+			                </ul>
+			            </li>
+			        </ul>
+			    </div>
+			    </div>
+			</nav>
+		<div class="container b_top">
+		    <div class="row" >
+		        <div class="col-xs-6 col-sm-3 border_b">
+		            <img src="img/Record_img.png" class="img-rounded img"/>
+		            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+		        </div>
+		        <div class="col-xs-6 col-sm-3 border_b">
+		            <img src="img/Record_img.png" class="img-rounded img"/>
+		            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+		        </div>
+		 
+		        <div class="clearfix visible-xs"></div>
+		 
+		        <div class="col-xs-6 col-sm-3 border_b">
+		             <img src="img/Record_img.png" class="img-rounded img"/>
+		             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+		        </div>
+		        <div class="col-xs-6 col-sm-3 border_b">
+		             <img src="img/Record_img.png" class="img-rounded img"/>
+		             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+		        </div>
+		    </div>
+		</div>	
+		
+		<div class="biao" style="max-width: 600px;margin: auto;">
+			<h1>填写个人信息</h1>
+			<form class="form-horizontal" role="form">
+			  <div class="form-group">
+			    <label for="firstname" class="col-sm-2 control-label label_name">账号</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="firstname" placeholder="请输入账号">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="phone" class="col-sm-2 control-label label_name">手机号</label>
+			    <div class="col-sm-10">
+			      <input type="number" class="form-control" id="phone" placeholder="请输入手机号">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="code" class="col-sm-2 control-label label_name">验证码</label>
+			    <div class="col-sm-10">
+			      <input type="number" class="form-control" id="code" placeholder="请输入验证码">
+			      <a class="btn btn-small get-code" style="width: 32%;height:44px;display: block;position: absolute;margin-top:-53px;right:0%;line-height: 44px;text-align: center;" value="获取验证码" onclick="getCode(this)" id="J_getCode" data-lang=""/>获取验证码</a>
+        		  <a class="btn btn-small reset-code" id="J_resetCode" style="display:none;width:30%;height:44px;position: absolute;margin-top:-53px;right:0%;line-height: 44px;font-size: 14px;"><span id="J_second" style="color: #333;font-size:14px;">60</span><span>秒后重发</span></a>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="code_input" class="col-sm-2 control-label label_name">图形验证码</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="code_input" value="" placeholder="请输入图形验证码"/>
+			      <span id="v_container" style="width: 150px;height: 50px;position: absolute;right: 15px;top:0px"></span>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="sex" class="col-sm-2 control-label">性别</label>
+			    <div class="col-sm-10">
+			    	<div class="radio">
+					    <span class="radio_sex">
+					    	<input type="radio" name="deo" id="deo1" checked="checked">
+						    <label for="deo1"></label>
+						    <span>女</span>
+					    </span>
+					    <span class="radio_sex">
+						    <input type="radio" name="deo" id="deo2">
+						    <label for="deo2"></label>
+						    <span>男</span>
+						</span>    
+					</div>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="code_input" class="col-sm-2 control-label">爱好</label>
+			    <div class="col-sm-10">
+			      <label class="checkBox radio_sex"><input type="checkbox">选项一</label>
+			      <label class="checkBox radio_sex"><input type="checkbox">选项一</label>
+			      <label class="checkBox radio_sex"><input type="checkbox">选项一</label>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="remarks" class="col-sm-2 control-label">备注信息</label>
+			    <div class="col-sm-10">
+			    	<textarea id="remarks" rows="3"></textarea>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-inverse">登录</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+	</body>
+<script src="js/gVerify.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	//图形验证码
+	var verifyCode = new GVerify("v_container");
+	
+    /*获取验证码*/
+	var isPhone = 1;
+	function getCode(e){
+		checkPhone(); //验证手机号码
+		if(isPhone){
+			resetCode(); //倒计时
+		}else{
+			$('#phone').focus();
+		}
+		
+	}
+    //验证手机号码
+    function checkPhone(){
+        var phone = $('#phone').val();
+        var pattern = /^1[0-9]{10}$/;
+        isPhone = 1;
+        if(phone == '') {
+            alert('请输入手机号码');
+            isPhone = 0;
+            return;
+        }
+        if(!pattern.test(phone)){
+            alert('请输入正确的手机号码');
+            isPhone = 0;
+            return;
+        }
+    }
+    //倒计时
+    function resetCode(){
+        $('#J_getCode').hide();
+        $('#J_second').html('60');
+        $('#J_resetCode').show();
+        var second = 60;
+        var timer = null;
+        timer = setInterval(function(){
+            second -= 1;
+            if(second >0 ){
+
+                $('#J_second').html(second);
+            }else{
+                is_m = true;
+                clearInterval(timer);
+                $('#J_getCode').show();
+                $('#J_resetCode').hide();
+            }
+        },1000);
+    }
+</script>	
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模仿li标签实现省市区三级联动</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #linkage {
+            margin: 50px auto;
+            width: 800px;
+        }
+        
+        .copy-select {
+            width: 200px;
+            height: 31px;
+            line-height: 30px;
+            cursor: pointer;
+            margin: 0 10px 0 0;
+            display: inline-block;
+            border: 1px solid orange;
+            position: relative;
+            text-align: center;
+        }
+        
+        .copy-select:after {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            margin-top: -5px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #000;
+        }
+        
+        .copy-select input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            border: none;
+            text-align: center;
+        }
+        
+        .copy-select ul {
+            position: absolute;
+            top: 31px;
+            left: 0;
+            display: none;
+            width: 200px;
+            height: 500px;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+        
+        .copy-select ul li {
+            list-style: none;
+            height: 30px;
+        }
+        
+        .copy-select ul li:nth-child(2n-1) {
+            background-color: rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+ 
+<body>
+    <div id="linkage">
+        <div class="copy-select" id="province">
+            <input type="text" name="province" id="getProvinceValue" readonly value="选择省份">
+            <ul></ul>
+        </div>
+        <div class="copy-select" id="city">
+            <input type="text" name="city" id="getCityValue" readonly value="选择城市">
+            <ul></ul>
+        </div>
+        <div class="copy-select" id="district">
+            <input type="text" name="district" id="getDistrictValue" readonly value="选择区域">
+            <ul></ul>
+        </div>
+        <input id="pLiIndex" type="hidden" value="" />
+    </div>
+ 
+    <!-- <button>获取值</button> -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/address.js"></script>
+    <!-- 美化滚动条 https://github.com/inuyaksa/jquery.nicescroll-->
+    <!-- <script type="text/javascript" src="./jquery.nicescroll.js"></script> -->
+    <script type="text/javascript">
+        $(function() {
+            $("#linkage").linkage("#province", "#city", "#district", ".copy-select");
+        });
+ 
+        // $('button').click(function() {
+        //     var inputs = $('.copy-select').find('input');
+        //     var obj = {};
+        //     for (var i = 0; i < inputs.length; i++) {
+        //         obj[inputs[i].name] = inputs[i].value;
+        //     }
+        //     console.log(obj);
+        // })
+    </script>
+ 
+    <!-- <script type="text/javascript">
+        $('.copy-select ul').niceScroll({
+            cursorcolor: "#ccc", //#CC0071 光标颜色
+            cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+            touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+            cursorwidth: "5px", //像素光标的宽度
+            cursorborder: "0", // 	游标边框css定义
+            cursorborderradius: "5px", //以像素为光标边界半径
+            autohidemode: false //是否隐藏滚动条
+        });
+    </script> -->
+ 
+ 
+</body>
+ 
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			.a{
+				background-image: url(img/price.png);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				padding: 2px 5px;
+			    margin: 2px;
+			    color: #fff;
+			}
+			#num{
+				/*display: none;*/
+			}
+		</style>
+	</head>
+	<body>
+		<!--通过把html中的字符串的每个字符添加背景图-->
+		<span id="num">49086735</span>(可隐藏掉)
+		<span id="count">	</span>
+		*******************************************<br />
+		<!--js中得到数组循环到html中-->
+		<div id="zi"></div>
+	</body>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		(function(){
+			var a = ""
+			var num = $("#num").html();
+			var ch = num.toString();
+			for (var i=0;i<ch.length;i++) {
+				a += '<span>' + ch[i] + '</span>';
+			}
+			$("#count").html(a);
+			$("#count").children().addClass("a");
+		})();
+		
+		
+		var list = "";
+ 		var arry = ["5", "8", "1", "3", "6", "7", "8", "9", "2", "0"]
+        for (var i in arry) {
+            list += '<span>' + arry[i] + '</span>';
+        };
+        document.getElementById("zi").innerHTML = list;
+        $("#zi").children().addClass("a");
+	</script>
+</html>

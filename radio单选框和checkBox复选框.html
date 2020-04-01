@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Correct</title>
+	</head>
+	<style type="text/css">
+		.radio input {
+	        display: none;/*取消默认样式*/
+	    }   
+	    .radio input+label {    /*紧接input出现的label，要有相同父元素*/
+	        display: inline-block;
+	        position: relative;
+	        border-radius: 50%;
+	        border: 1px #aaa solid;
+	        width: 14px;   /*外圈圆高度、宽度*/
+	        height: 14px; 
+	    }
+	    .radio input+label::after {  /*伪元素制作内部的圆*/
+	        content: " ";
+	        border-radius: 50%;
+	        position: absolute;/*居中方法*/
+	        top: 50%;
+	        left: 50%;
+	        width: 6px; /*中心圆的宽度、高度*/
+	        height: 6px;
+	        margin-top: -3px;
+	        margin-left: -3px;
+	    }
+	
+	    .radio input:checked+label {
+	        background-color: white;/*选中后外圈圆颜色*/
+	        border-color: blue;   
+	    }  
+	    .radio input:checked+label::after {   
+	        background-color: blue;/*选中radio中心圆的颜色*/
+	    }
+		input[type='checkbox']{
+		    width: 20px;
+		    height: 20px;
+		    background-color: #fff;
+		    -webkit-appearance:none;
+		    border: 1px solid #c9c9c9;
+		    border-radius: 2px;
+		    outline: none;
+		}
+		.checkBox input[type=checkbox]:checked{
+		   background: url("img/timg.png")no-repeat center;
+		   background-size: 100% 100%;
+		}
+	</style>
+	<body>
+		<div class=radio>
+		    <input type="radio" name="deo" id="deo1" checked="checked">
+		    <label for="deo1"></label>
+		    <span>男</span>
+		    <input type="radio" name="deo" id="deo2">
+		    <label for="deo2"></label>
+		    <span>女</span>
+		</div>
+		<br /><br /><br /><br />
+		<label class="checkBox"><input type="checkbox">全选</label>
+	</body>
+</html>

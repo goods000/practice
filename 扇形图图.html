@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	</head>
+	<link rel="stylesheet" href="__INDEX__/css/style.css" />
+    <link rel="stylesheet" href="__INDEX__/css/css.css" />
+    <link rel="stylesheet" href="__INDEX__/css/font.css" />
+	<style>
+		body{background:#fff;}
+		.listing h1{background: #1c6055;color: #fff;text-align: center;padding: 10px 0;font-size: 18px;font-weight: 500;}
+		.listing_di p{width: 50%;float: left;padding:5px 10px;box-sizing: border-box;}
+		.listing_di{overflow: hidden;}
+		.listing_di p i{width: 10px;height: 10px;margin-top:5px;margin-right:10px;border-radius: 50%;display: block;}
+		.listing_di p:nth-child(1) i{background: #df6169;}
+		.listing_di p:nth-child(2) i{background: #5ab1ef;}
+		.listing_di p:nth-child(3) i{background: #ffaf6d;}
+		.listing_di p:nth-child(4) i{background: #ab85f9;}
+		.listing_di p:nth-child(5) i{background: #2ec7c9;}
+		.listing_di p{display: flex;}
+		.listing_ddp{display: flex;padding: 0 10px;margin-top:30px;}
+		.listing_ddp div{border-radius: 5px;}
+		.listing_ddp .listing_left{width: 40%;text-align: center;background: #ffd6d9;padding: 10% 0;}
+		.listing_ddp .listing_right{width: 57%;text-align: center;margin-left: 3%;}
+		.listing_ddp .listing_right h5{text-align: right;width: 50%;font-weight: 500;font-size: 16px;}
+		.listing_ddp .listing_top h5{color: #ff821a;}
+		.listing_ddp .listing_bottom h5{color: #16d3a0;}
+		.listing_ddp .listing_left h5{font-size: 16px;color: #ff313e;font-weight: 500;margin-top:10%;}
+		.listing_ddp .listing_right s{width: 40%;text-align: left;}
+		.listing_ddp .listing_top{background: #ffe9d6;margin-bottom: 3%;padding:20px 10px;display: flex;}
+		.listing_ddp .listing_bottom{background: #d6fff4;padding:20px 10px;display: flex;}
+	</style>
+	<body>
+		<div class="listing">
+			<h1>2019年3月7号资产清单</h1>
+			<div id="main" style="width:90%;height: 300px;margin: auto;"></div>
+			<div class="listing_di">
+				<p><i></i>定期：1000.2112</p>
+				<p><i></i>收益：1000.2112</p>
+				<p><i></i>活期：1000.2112</p>
+				<p><i></i>释放：1000.2112</p>
+				<p><i></i>赢币：1000.2112</p>
+			</div>
+			<div class="listing_ddp">
+				<div class="listing_left"><s>总资产</s><h5>12455.2155</h5></div>
+				<div class="listing_right">
+					<div class="listing_top"><s>总收入</s><h5>12455.2155</h5></div>
+					<div class="listing_bottom"><s>竞猜收益</s><h5>12455.2155</h5></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="js/echartss.min.js" ></script>
+		<script>
+		var myChart = echarts.init(document.getElementById('main'));
+
+option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:[]
+    },
+    series: [
+       
+        {
+            name:'',
+            type:'pie',
+            radius: ['20%', '55%'],
+            label: {
+                normal: {
+                    formatter: ' {per|{d}%}  ',
+                    borderWidth: 21,
+                    borderRadius: 14,
+                   
+                    rich: {
+                        a: {
+                            color: '#999',
+                            lineHeight: 152,
+                            align: 'center'
+                        },
+                      
+                        hr: {
+                           
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        b: {
+                            fontSize: 14,
+                            lineHeight: 23
+                        },
+                        per: {
+                            color: '#eee',
+                            backgroundColor: '#334455',
+                            padding: [2, 3],
+                            borderRadius: 2
+                        }
+                    }
+                }
+            },
+            data:[
+                {value:335, name:'定期',itemStyle:{
+                	color:'#df6169'
+                }},
+                {value:310, name:'收益',itemStyle:{
+                	color:'#5ab1ef'
+                }},
+                {value:234, name:'活期',itemStyle:{
+                	color:'#ffaf6d'
+                }},
+                {value:135, name:'释放',itemStyle:{
+                	color:'#ab85f9'
+                }},
+                {value:1048, name:'赢币',itemStyle:{
+                	color:'#2ec7c9'
+                }}
+            ]
+        }
+    ]
+};
+
+ myChart.setOption(option);
+		</script>
+	</body>
+</html>

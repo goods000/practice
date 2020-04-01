@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		*{margin: 0px;padding: 0px;font-size: 14px;color: #000;font-family: "microsoft yahei";list-style: none;text-decoration: none;}
+		input,button,select{outline:none;-webkit-appearance: none;}
+		body{background-size: 100% 100%;height:100vh;overflow:auto;}
+		
+		.h1{text-align: center;font-weight: 500;font-size: 20px;padding:10px 0;border-bottom: 1px solid #dbdbdb;background: #fff;color: #000;}
+		.h1 s{font-size: 18px;color: #000;}
+		.h1 a{position: absolute;font-size: 14px;right: 10px;top:15px;}
+		.h1 a span{color: #000;font-size: 14px;}
+		.h1 button{position: absolute;top:13px;left: 10px;background: none;border: 0px;font-size: 20px;color: #000;}
+
+		.body{margin-bottom: 45px;}
+		.mian{display: flex;flex-direction: row;align-items: center;padding: 10px 15px;border-bottom: 1px solid #DBDBDB;}
+		.mian .chioce{width: 6%;}
+		.mian .tu{width: 30%;border-radius: 5px;margin: 5px 10px;}
+		.box{width: 100%;}
+		.box .title{width: 95%;overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;-webkit-box-orient: vertical;display: -webkit-box;}
+		.box .active{background: #eee;border-radius: 5px;padding: 5px;margin: 5px 0;display: inline-block;}
+		.box .s_btn{display: flex;flex-direction: row;justify-content: space-between;align-items: center;}	
+		.box .s_btn .sprice{color: #FF0000;font-size: 15px;}	
+		.box .s_btn .sprice b{color: #FF0000;font-size: 15px;}	
+		.box .s_btn .btn{border: 1px solid #dbdbdb;padding: 0 5px;border-radius: 5px;font-size: 16px;}
+		/*.box .s_btn .btn .an{font-size: 20px;}*/
+		.box .s_btn .btn .num{border-right: 1px solid #DBDBDB;border-left: 1px solid #DBDBDB;margin: 0 5px;padding: 0 5px;}
+		.box_btn{position: fixed;bottom: 0px;width: 100%;background: #fff;padding: 10px 15px;border-top: 1px solid #eee;height: 25px;line-height: 25px;
+		display: flex;flex-direction: row;align-items: center;}
+		.box_btn #all_chioce{width: 20px;height: 20px;position: relative;top: 4px;}
+		.box_btn .xuan_title{margin:0 5px;}
+		.box_btn span{width: 46%;}
+		.box_btn span:nth-child(2){text-align: right;}
+		.box_btn span .count{background: #6641E2;padding: 3px 10px;border-radius: 5px;color: #fff;}
+		.box_btn span .del{background: #898989;padding: 3px 10px;border-radius: 5px;margin-left: 15%;}
+		#sun b,#sun span{color: red;}
+	</style>
+	<body>
+		<h1 class="h1">购物车</h1>
+		<div class="body">
+			<div class="mian">
+				<img src="img/nochoice.png" class="chioce"/>
+				<img src="img/11.jpg" class="tu"/>
+				<span class="box">
+					<div class="title">
+						夏季连衣裙黑色显瘦就打回复哈啊十几个哈沙肯德基萨拉科技感
+					</div>
+					<span class="active">
+						黑色 S码 积极
+					</span>
+					<div class="s_btn">
+						<span class="sprice">￥<b>4</b></span>
+						<span class="btn">
+							<span class="an jia">+</span>
+							<span class="num">10</span>
+							<span class="an jian">-</span>
+						</span>
+					</div>
+				</span>
+			</div>
+			
+			<div class="mian">
+				<img src="img/nochoice.png" class="chioce"/>
+				<img src="img/22.jpg" class="tu"/>
+				<span class="box">
+					<div class="title">
+						肯德基爱丽丝开关机拉克丝估计大时高时低割发代首
+					</div>
+					<span class="active">
+						白色 2XL码 ko
+					</span>
+					<div class="s_btn">
+						<span class="sprice">￥<b>1</b></span>
+						<span class="btn">
+							<span class="an jia">+</span>
+							<span class="num">1</span>
+							<span class="an jian">-</span>
+						</span>
+					</div>
+				</span>
+			</div>
+			
+			<div class="mian">
+				<img src="img/nochoice.png" class="chioce"/>
+				<img src="img/33.jpg" class="tu"/>
+				<span class="box">
+					<div class="title">
+						小明小明大家啊克鲁赛
+					</div>
+					<span class="active">
+						套装  肤质柔和质量 (M码)
+					</span>
+					<div class="s_btn">
+						<span class="sprice">￥<b>10</b></span>
+						<span class="btn">
+							<span class="an jia">+</span>
+							<span class="num">5</span>
+							<span class="an jian">-</span>
+						</span>
+					</div>
+				</span>
+			</div>
+			
+			<div class="mian">
+				<img src="img/nochoice.png" class="chioce"/>
+				<img src="img/44.jpg" class="tu"/>
+				<span class="box">
+					<div class="title">
+						怕是屁偶所多够奥所过军偶付军过过过过过过过
+					</div>
+					<span class="active">
+						L码
+					</span>
+					<div class="s_btn">
+						<span class="sprice">￥<b>1</b></span>
+						<span class="btn">
+							<span class="an jia">+</span>
+							<span class="num">6</span>
+							<span class="an jian">-</span>
+						</span>
+					</div>
+				</span>
+			</div>
+			
+			<div class="mian">
+				<img src="img/nochoice.png" class="chioce"/>
+				<img src="img/55.jpg" class="tu"/>
+				<span class="box">
+					<div class="title">
+						李大发快递联发科老规矩考试大纲肯德基发了开始改
+					</div>
+					<span class="active">
+						1盒
+					</span>
+					<div class="s_btn">
+						<span class="sprice">￥<b>5</b></span>
+						<span class="btn">
+							<span class="an jia">+</span>
+							<span class="num">6</span>
+							<span class="an jian">-</span>
+						</span>
+					</div>
+				</span>
+			</div>
+			
+		</div>
+		<div class="box_btn">
+			<span>
+				<img src="img/nochoice.png" id="all_chioce"/><span class="xuan_title">全选</span>
+				<span id="sun">总价:
+					<b>￥<span>0</span></b>
+				</span>
+			</span>
+			<span>
+				<span class="count">结算</span>
+				<span class="del">删除</span>
+			</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+	/*勾选中*/
+	$(function(){
+		var toggle = true;
+		$(".chioce").click(function() {
+			if (toggle) {
+				getSun()
+				$(this).attr("src", "img/chioce.png");
+				toggle = false;
+			} else{
+				$(this).attr("src", "img/nochoice.png");
+				toggle = true;
+			}
+		})
+	})
+	
+	/*全勾选中*/
+	$(function(){
+		var toggle = true;
+		$("#all_chioce").click(function(){
+			if (toggle) {
+				getSun()
+				$("#all_chioce").attr("src","img/chioce.png");
+				$(".chioce").attr("src","img/chioce.png");
+				toggle = false;
+			} else{
+				$("#all_chioce").attr("src","img/nochoice.png");
+				$(".chioce").attr("src","img/nochoice.png");
+				toggle = true;
+			}
+		})
+	})
+	
+	/*数量加*/
+	$(".jia").click(function(){
+		$(this).next().html(parseInt($(this).next().html())+1);
+	})
+	
+	/*数量减*/
+	$(".jian").click(function(){
+		if ($(this).prev().html() == 1) {
+			$(this).prev().html(1);
+			layer.msg("至少一件",{icon:2});
+		} else{
+			$(this).prev().html(parseInt($(this).prev().html())-1);
+		}
+	})
+	
+	/*删除*/
+	$(".del").click(function(){
+		$.each($(".chioce"), function(i,val) {
+			if ($(this).attr("src") == "img/chioce.png") {
+				$(this).parent().remove();
+				$("#all_chioce").attr("src","img/nochoice.png");
+			}else{
+				
+			}
+		});
+	})
+	
+	/*计算总和*/
+	function getSun(){
+		var sun = 0;
+		$.each($(".mian"), function(i,val) {
+			sun += (parseInt($(this).children().children().find(".num").html())*parseInt($(this).find(".sprice").children().html()));
+			console.log(sun)
+			$("#sun").find("span").html(sun);
+		});
+	}
+	</script>
+</html>

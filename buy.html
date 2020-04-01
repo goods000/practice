@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			.buy{background: #1A1743;}
+			.buy_b{display: flex;flex-direction: row;align-items: center;padding:10px;border-bottom: 1px solid #eee;}
+			.ju p{margin-bottom: 8px;}
+			.buy_b img{width: 30%;}
+			.buy_b .buy_i_b{width: 60%;margin-left: 2%;}
+			.buy_b .buy_i_b p{margin: 10px 0;}
+			.buy_title_b .qian{width: 80px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+			.buy_title_b p i{font-style: normal;font-size: 1rem;color: #B3B3B3;}
+			.bu{position: relative;border: none !important;margin-top: 10px;}
+			.pay_img{width: 15px;height: 15px;position: absolute;right: 10px;}
+			.shop_buy{padding: 15px 15px 30px;background: #fff;}
+			.shop_buy p{font-size: 14px;color: #7E7D80;margin-bottom: 10px;}
+			.shop_buy strong{font-size: 16px;}
+			.gorup{background: #1A1743;padding: 15px 20px;border-bottom: 1px solid #EEEEEE;display: flex;justify-content: flex-start;align-items: center;}
+			.inputTitle{font-size: 15px;color: #666;width: 75px; text-overflow: ellipsis; -webkit-box-orient: vertical;overflow: hidden; white-space: nowrap;}
+			.gorup input{font-size: 15px;padding-left: 20px;border: 0px;}
+			.gorup select{font-size: 15px;padding-right: 20px;border: 0px;width: 100%;direction: rtl;color: #999999;}
+			.gorup input::-webkit-input-placeholder{color:#999!important;}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<a class="back" href="javascript:history.back(-1);"><img src="${ctx }/front/images/back.png" /></a>
+			<span class="txt" data-localize=""></span>
+		</div>
+		<div class="buy">
+	    	<div class="buy_b">
+				<img src="images/pool_1.png" />
+				<div class="buy_i_b">
+					<p>小矿机 (最高收益2倍)</p>
+					<div class="buy_title_b">
+						<p><i class="i">基础算力值：</i><i  class="price">100</i></p>
+						<p><i class="i">购买金额：</i><i  class="price">100USDT</i></p>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <div class="gorup bu">
+			<span class="inputTitle">
+					支付方式
+			</span>
+			<select name="">
+				<option value="">100%USDT</option>
+				<option value="">90%USDT+10%LGC</option>
+			</select>
+			<img src="images/next.png" class="pay_img" />
+		</div>
+		<div class="shop_buy">
+			<span class="inputTitle">
+					需要支付金额
+			</span>
+			<input type="tel" readonly="readonly" name="" id="num" value="45455121212" />
+		</div>
+		
+		<input type="button" class="btn_submit" value="立即购买" />
+	</body>
+</html>

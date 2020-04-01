@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>盒子之间自动变换</title>
+		<style type="text/css">
+			*{margin: 0px;padding: 0px;font-size: 1rem;}
+			header h3{text-align: center;padding: 0.6rem;border-bottom: 1px solid #F5F5F5;}
+			.box{margin: 2% 0;}
+			@media screen and (height: 568px) {.box ul{height: 58vh !important;}}
+			@media screen and (height: 640px) {.box ul{height: 53vh !important;}}
+			@media screen and (height: 667px) {.box ul{height: 53vh !important;}}
+			@media screen and (height: 731px) {.box ul{height: 48vh !important;}}
+			@media screen and (height: 736px) {.box ul{height: 48vh !important;}}
+			@media screen and (height: 812px) {.box ul{height: 43vh !important;}}
+			.box ul{width: 50%;display: flex;flex-direction: column;align-items: center;justify-content: flex-start;flex-wrap: wrap;}
+			.box ul li{list-style: none;width: 88%;margin: 2% 6%;white-space: nowrap;}
+			.box ul li i{font-style: normal;margin: 0 5%;}
+			.box ul li:nth-child(1) i,.box ul li:nth-child(2) i,.box ul li:nth-child(3) i{color: firebrick;}
+			.box ul li.active{background: firebrick;}
+			.box ul li.active i,.box ul li.active span{color: #fff;}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h3>盒子之间自动变换</h3>
+		</header>
+		<div class="box">
+			<ul>
+				<li><i>1</i><span>程序员外包平台</span></li>
+				<li><i>2</i><span>域名永久购买</span></li>
+				<li><i>3</i><span>全网心情监测</span></li>
+				<li><i>4</i><span>海底捞CRM系统</span></li>
+				<li><i>5</i><span>心情监测平台</span></li>
+				<li><i>6</i><span>软件测试培训班</span></li>
+				<li><i>7</i><span>深圳共享办公室</span></li>
+				<li><i>8</i><span>小程序开发</span></li>
+				<li><i>9</i><span>聚合支付系统</span></li>
+				<li><i>10</i><span>hr人事管理系统</span></li>
+				<li><i>11</i><span>北大青鸟是个啥</span></li>
+				<li><i>12</i><span>心情分析系统</span></li>
+				<li><i>13</i><span>电商代运营公司</span></li>
+				<li><i>14</i><span>写字楼出租</span></li>
+				<li><i>15</i><span>网站制作</span></li>
+				<li><i>16</i><span>企业管理咨询</span></li>
+				<li><i>17</i><span>电商ERP</span></li>
+				<li><i>18</i><span>抠图兼职</span></li>
+				<li><i>19</i><span>PS 培训班</span></li>
+				<li><i>20</i><span>买卖域名</span></li>
+				<li><i>21</i><span>渗透测试</span></li>
+				<li><i>22</i><span>小程序制作</span></li>
+				<li><i>23</i><span>外贸网站的建设</span></li>
+				<li><i>24</i><span>留学保险怎么算</span></li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		 var s = 0, o = $(".box").find("li");
+        setInterval(function() {
+            s >= o.length && (s = 0);
+            var t = o.eq(s);
+            t.siblings().removeClass("active");
+              setTimeout(function() {
+                  t.addClass("active")
+              }, 500);
+              s++
+        }, 2000);
+		
+	</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>H5唤起APP进行分享</title>
+	</head>
+	<body>
+		<a href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=123456">QQ临时交流</a>
+	</body>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script type="text/javascript">
+        var url = location.href;
+        var timestamp="";
+        var signature = "";
+		var title = document.title;
+		var shareData = {
+			"imgUrl": data.imgUrl, // 分享显示的缩略图地址 ,根据自己情况而定
+			"link": url, // 分享地址  
+			"desc": title, // 分享描述  
+			"title": title, // 分享标题  
+			success: function() {
+				alert("分享成功"); 
+			}
+		};
+		
+		function init() {
+			var parms = {
+				url: url
+			};
+			$.ajax({
+				type: "POST",
+				url: "/membervideo/share.ashx", //后台接口
+				data: parms, //可选参数
+				dataType: "json",
+				success: function(data) {
+					timestamp = data.timestamp;
+					signature = data.signature;
+					//alert(timestamp)
+					initwx(timestamp, signature);
+				} //可选参数
+			});
+		
+		}
+		$(function() {
+			init();
+		});
+		
+		function initwx(timestamp, signature) {
+			wx.config({
+				debug: false, // 
+				appId: 'wxxxxxxxxxx', // 公众号的唯一标识 
+				timestamp: timestamp, //生成签名的时间戳 
+				nonceStr: 'GDOU', //生成签名的随机串
+				signature: signature, // 
+				jsApiList: ['onMenuShareTimeline', // 
+					'onMenuShareAppMessage'
+				] // 
+			});
+			wx.checkJsApi({
+				jsApiList: [
+					'onMenuShareTimeline', 'onMenuShareAppMessage'
+				]
+			});
+			wx.ready(function() {
+				wx.onMenuShareTimeline(shareData); //分享到朋友圈
+				wx.onMenuShareAppMessage(shareData); //分享给朋友
+			});
+		}
+	</script>
+</html>

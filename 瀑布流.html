@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>瀑布流布局</title>
+	</head>
+	<style type="text/css">
+		/*1.利用column 多行布局实现瀑布流*/
+		/*.container {
+            margin: 10px;
+            column-count: 3;
+            column-gap: 10px;
+        }
+        .box {
+            margin-bottom: 10px;
+        }
+        .box p{
+            width: 100%;
+            height:100%;
+        }*/
+       
+       /*2.利用masonry.pkgd.js插件*/
+        .box {
+			width: 200px;
+			text-align: justify;
+			margin-bottom: 10px;
+		}
+		
+		/*3.flex 弹性布局实现瀑布流*/
+		/*.box {
+          display: flex;  
+          flex-flow:column wrap;
+          height: 100vh;
+        }
+        .item {
+            margin: 10px;
+            width: calc(100%/3 - 20px);
+        }
+        .item img{
+            width: 100%;
+            height:100%;
+        }*/
+	</style>
+	<body>
+		<header>瀑布流布局</header>
+		<div class="container">
+			<div class="box">
+				<h3>第一句</h3>
+				<p>
+					<span>不管全世界所有人怎么说，</span>
+					<span>我都认为自己的感受才是正确的。</span>
+					<span>无论别人怎么看，</span>
+					<span>我绝不打乱自己的节凑。</span>
+					<span>喜欢的事自然可以坚持，</span>
+					<span>不喜欢怎么也长久不了。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第二句</h3>
+				<p>
+					<span>少年时我们追求激情，</span>
+					<span>成熟后却迷恋平庸，</span>
+					<span>在外面寻找，伤害，背离之后，</span>
+					<span>还能一如既往的相信爱情</span>
+					<span>这是一种勇气。</span>
+					<span>每个人都有属于自己的一片森林，</span>
+					<span>也许我们从来不曾去过，</span>
+					<span>但它一直在那里，总会在哪里，</span>
+					<span>密匙的人迷失了，相逢的人会再相逢。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第三句</h3>
+				<p>
+					<span>你要做一个不动声色的大人了。不准情绪化，不准偷偷想念，不准回头看。去过自己另外的生活。你要听话，不是所有的鱼都会生活在同一片海里。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第四句</h3>
+				<p>
+					<span>我一直以为人是慢慢变老的，其实不是，人是一瞬间变老的。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第五句</h3>
+				<p>
+					<span>哪里有人喜欢孤独，只不过不乱交朋友罢了，那样只能落得失望。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第六句</h3>
+				<p>
+					<span>希望你可以记住我，记住我这样活过，这样在你身边呆过。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第七句</h3>
+				<p>
+					<span>刚刚好，看见你幸福的样子，于是幸福着你的幸福</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第八句</h3>
+				<p>
+					<span>我或许败北，或许迷失自己，或许哪里也抵达不了，或许我已失去一切，任凭怎么挣扎也只能徒呼奈何，或许我只是徒然掬一把废墟灰烬，唯我一人蒙在鼓里，或许这里没有任何人把赌注下在我身上。无所谓。有一点是明确的：至少我有值得等待有值得寻求的东西。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第九句</h3>
+				<p>
+					<span>死并非生的对立面，而作为生的一部分永存</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十句</h3>
+				<p>
+					<span>不要同情自己，同情自己是卑劣懦夫干的勾当</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十一句</h3>
+				<p>
+					<span>对相爱的人来说，对方的心才是最好的房子。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十二句</h3>
+				<p>
+					<span>或许我的心包有一层硬壳，能破壳而入的东西是极其有限的。所以我才不能对人一往情深</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十三句</h3>
+				<p>
+					<span>大凡事物必有顺序，看的太超前了不行。看的太超前，势必忽略脚下，人往往跌倒。可另一方面，光看脚下也不行。不看好前面，会撞上什么。所以么，要在多少往前看的同时按部就班处理眼下事物。这点至为关键，无论做什么。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十四句</h3>
+				<p>
+					<span>人获得自由，究竟意味着什么？难道就是从一个牢笼里巧妙地逃出来，其实只是置身于另一个更大的牢笼吗？其实我们合唱不是一只只的笼中鸟，无论怎么飞，永远也飞不出被笼罩的社会和环境自由，也只是幻想主义的说辞，我们最终都是找不到的。而脱离了社会，我们也就无所谓自由了。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十五句</h3>
+				<p>
+					<span>所谓嫉妒是世界上最令人绝望的牢狱。因为那是囚徒囚禁自我的牢狱，并非被人凭借暴力关进去，是自己走进去，从里面锁上牢门，亲手把钥匙扔到铁栏杆外的。而且世界上没有一个人知道他被幽禁在那里。当然，只要他下决心出去，就可以走出去。因为那牢狱就在他心里。然而下不了决心，他的心变得像石壁一样坚硬。那正是嫉妒的本质。</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十六句</h3>
+				<p>
+					<span>"最最喜欢你，绿子。""什么程度？""像喜欢春天的熊一样。""春天的熊？"绿子再次扬起脸，"什么是春天的熊？""春天的原野里，你一个人挣走着，对面走来一只可爱的小熊，浑身的毛活像天鹅绒，眼睛圆鼓鼓的。它这么对你说到：'你好，小姐，和我一块打滚玩好么？'接着，你就和小熊抱在一起，顺着长满三叶草的山坡咕噜咕噜滚下去，整整玩了一大天。你说棒不棒？""太棒了。""我就是这么喜欢你。"</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十七句</h3>
+				<p>
+					<span>所有的悲伤，总会留下一丝欢乐的线索；所有的遗憾，总会留下一处完美的角落。我在冰封的深海，寻找希望的缺口；却在午夜惊醒时，瞥见绝美的月光。——几米</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第十八句</h3>
+				<p>
+					<span>以前我以为，那些带给别人欢笑的人，从来不会有哀伤。现在我才知道，有些人在最难过的时候，还是会努力带给别人快乐。——几米</span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第句</h3>
+				<p>
+					<span></span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第句</h3>
+				<p>
+					<span></span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第句</h3>
+				<p>
+					<span></span>
+				</p>
+			</div>
+			<div class="box">
+				<h3>第句</h3>
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/masonry.pkgd.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		//：让每个.box的背景颜色随机
+		//$('.box').css('background',rc());
+		$('.box').each(function(i,div){
+			$(div).css('background',rc());
+		});
+	
+		//调用masonry插件
+		//$('.container').masonry();
+		$('.container').masonry({
+			columnWidth: 200,
+			itemSelector: '.box',
+			gutter: 10		//槽宽
+		});
+	
+	
+		function rc(){
+			var r = Math.floor(Math.random()*256);
+			var g = Math.floor(Math.random()*256);
+			var b = Math.floor(Math.random()*256);
+			return `rgb(${r},${g},${b})`;
+		}
+	</script>
+</html>

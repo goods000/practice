@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta name="" content="">
+	</head>
+	<body>
+
+	</body>
+	<script>
+		function getLetters()
+		{
+			var s="ZXCVBNMASDFHJKLQWERTYUIOP";
+			var n=Math.round(Math.random()*25);
+			var ch=s.charAt(n);
+			var div=document.createElement('div');
+			div.innerHTML=ch;
+			div.style.position='absolute';
+			div.style.top='0px';
+			div.style.left=Math.round(Math.random()*document.body.clientWidth)+'px';
+			document.body.appendChild(div);
+		}
+		setInterval(getLetters,500);
+		//将所有的字母下落
+		function down()
+		{
+			var div=document.getElementsByTagName('div');
+			for(var i=0;i<div.length;i++)
+			{
+				div[i].style.top=div[i].offsetTop+5+'px';
+				if(div[i].offsetTop>400)
+				{
+					document.body.removeChild(div[i]);
+				}
+			}
+		}
+		setInterval(down,200);
+		document.body.onkeypress=function (event){
+			var div=document.getElementsByTagName('div');
+			var key=event.keyCode||event.charCode;
+			for(var i = 0; i <div.length; i++){
+				if(key==div[i].innerHTML.charCodeAt(0))
+				{
+				      document.body.removeChild(div[i]);
+				      break;
+				}
+			}
+		}
+	</script>
+</html>

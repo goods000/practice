@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>实现文件下载和</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{padding: 0px;margin: 0;font-size: 14px;color: #333;}
+			input,select{outline: none;}
+			a{text-decoration: none;margin: 10px;display: block;}
+			a:hover{color:#AA0000;text-decoration: underline;}
+			.gorup{background: #F5F5F5;padding: 5px 10px;}
+			.gorup select{width: 100%;padding: 5px 0;border: 1px solid #ddd;background: none;border-radius: 3px;}
+			.gorup input{width: 100%;padding: 5px;border: 1px solid #ddd;background: none;border-radius: 3px;}
+			.gorup span{width: 100%;padding: 5px;background: #fff;display: block;}
+		</style>
+	</head>
+	<body>
+		<!--第一种直接保存在本地-->
+		<a href="./img/1.png" download="1.png">下载</a>
+		<!--href 文件的绝对/相对地址download 属性规定被下载的超链接目标。
+		filename 规定作为文件名来使用的文本。一般在项目中不使用相对路径，因为在本地用很能没问题，但是代码上传到线上时，路径可能就不对了；-->
+		
+		<br /><br />
+		<div class="gorup">
+			<select name="" id="selected">
+				<option value="">--请选择--</option>
+				<option value="">长沙</option>
+				<option value="">株洲</option>
+				<option value="">湘潭</option>
+			</select>
+		</div>
+		<div class="gorup">
+			<input type="text" name="txt" id="txt" value="" />
+		</div>
+		<div class="gorup">
+			<span id="span"></span>
+		</div>
+			
+	</body>
+	<script type="text/javascript">
+//		$(".gorup select").click(function(){
+		$("#selected").on("change",function(){
+			var sel = $(this).find("option:selected").text();
+			$("#txt").val(sel);
+			$("#span").html(sel);
+		})
+		
+//		$("#selected").on("change",function(){
+//			if ($("option:selected",this).val() == '长沙') {
+//				$("#txt").attr("value",'长沙');
+//				$("#span").html("长沙");
+//			}else if ($("option:selected",this).val() == '株洲') {
+//				$("#txt").attr("value",'株洲');
+//				$("#span").html("株洲");
+//			}
+//		})
+		
+		/**需要创建文件并下载的**/
+//		fileDownload(content, name = 'fileName', suffix = 'csv'){
+//		  // 添加字节序标识，避免乱码
+//		  const data = `\uFEFF${content}`;
+//		  const blob = new Blob([data], { type: 'text/csv,charset=UTF-8' });
+//		  const downloadElement = document.createElement('a');
+//		  // 创建下载链接
+//		  const href = window.URL.createObjectURL(blob);
+//		  downloadElement.href = href;
+//		  // 下载文件名
+//		  downloadElement.download = `${name}.${suffix}`;
+//		  document.body.appendChild(downloadElement);
+//		  downloadElement.click();
+//		  // 移除元素
+//		  document.body.removeChild(downloadElement);
+//		  // 释放blob对象
+//		  window.URL.revokeObjectURL(href);
+//		}
+		/** 
+		 content 创建文件的内容  
+		 blob 类文件对象
+		 name 创建的文件名 suffix 文件后缀
+		 下面的就是创建一个a标签然后设置href以及download属性，并执行下载操作，然后移除a标签
+		 */
+	</script>
+</html>

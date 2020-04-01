@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>使用get方法调取后台数据</title>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<p id="id">157</p>
+		<p id="categoryID"></p>
+		<img src="" id="ico"/>
+		<img src="" id="picture"/>
+		<p id="price"></p>
+		<p id="description"></p>
+		<p id="details"></p>
+		
+	</body>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var id = $("#id").html();
+		var categoryID = $("#categoryID").html();
+		var price = $("#price").html();
+		var description = $("#description").html();
+		var details = $("#details").html();
+		var addr = 'https://www.cuidingdang.xyz';
+		var page = 0;
+		var size = 0;
+		var formData = new FormData();
+		formData.append("id", id);
+		formData.append("categoryID", categoryID);
+		formData.append("price", price);
+		formData.append("description", description);
+		formData.append("details", details);
+		$(document).ready(function(){
+			$.ajax({
+				type:"POST",
+				url: addr + "/cuidingdang/product-collection/List",
+				async:true,
+				data : formData, 
+				// 告诉jQuery不要去处理发送的数据
+				processData : false, 
+				// 告诉jQuery不要去设置Content-Type请求头
+				contentType : false,
+				dataType: "JSON",
+				/*data:{
+					id:id,
+					categoryID:categoryID,
+					ico:ico,
+					proVideo:proVideo,
+					picture:picture,
+					price:price,
+					description:description,
+					details:details,
+					page:1,
+					size:10,
+				},*/
+				success:function(data){
+					var data = JSON.stringify(data);
+					console.log(data);
+					layer.msg(msg,{ icon: 1,time: 2000});
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		});
+		
+		/*var addr = 'https://www.cuidingdang.xyz';
+		//传值给后台
+		$(document).ready(function(){
+			var prodctId = $("#prodctId").html();
+			$.ajax({
+				type:"get",
+				url: addr + "/cuidingdang/product-collection/api/getProductMinVideoDetail?prodctId=157",
+				async:true,
+				dataType: "JSON",
+				success:function(data){
+					console.log("传给你了")
+					if (data.status == null) {
+						layer.msg(data.msg,{ icon: 1,time: 2000});
+					}
+					
+				},
+				error:function(data){
+					console.log("没有传到");
+					console.log(data);
+				}
+			});
+		});*/
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title></title>
+  <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+  <style>
+   body{height: 100vh;width: 100vw;}
+   .progress {width: 100%;height: 15px;border-radius: 30px;border: 1px solid #22a7c8;background: #03161d;overflow: hidden;margin: 10% auto 2%;}
+.progress span{height: 15px;background-color: #03161d;background-size: 25px 35px;
+background-image: linear-gradient(-60deg,#22a7c8 0,#22a7c8 25%,#1f5b7c 0,#1f5b7c 50%,#22a7c8 0,#22a7c8 75%,#1f5b7c 0,#1f5b7c 100%);
+display: block;width: 0; line-height: 15px;text-align: right;}
+.num{/*{background:url(img/price.jpg);*/height: 3vh;border: 1px solid;letter-spacing: 10px;font-size: 1.4rem;width: 45vw;}
+  </style>
+      <script src="../1js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+ </head>
+ <body>
+  <div class="num_box">
+     <span class="num_title">总数:</span>
+     <div class="num">20000</div>
+    
+    <p><span class="num_title">售出数量:</span><i class="number">20000</i></p >
+  <div class="progress">
+        <span></span>
+  </div>
+</body>
+<script>
+ //进度条
+ var count1 = 0;
+ var count2 = 0;
+ $(".num").each(function(){
+  count1 +=+ $(this).html();
+ });
+ $(".number").each(function(){
+  count2 +=+ $(this).html();
+ })
+ var s=(count2/count1).toFixed(3);
+// var value =s.truncate();
+    ~function (document) {
+        var progress = document.getElementsByClassName('progress')[0];
+        var span = progress.getElementsByTagName('span')[0];
+        span.style.width = span.textContent=s*100+ '%';
+//      document.progress.getElementsByTagName('span')[0].innerHTML =span.textContent/numbe.textContent+% ;       
+//      span.style.width = span.textContent =  (count2 / count1)*100.toFixed(0) + '%';
+    }(document)
+</script>
+</html>

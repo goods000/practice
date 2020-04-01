@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>盒子横屏</title>
+		<link rel="stylesheet" type="text/css" href="css/login_font.css"/>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{margin: 0 auto;padding: 0px;}
+			@media screen and (orientation: portrait) {
+			      html{
+			         width : 100% ;
+			         height : 100% ;
+			          background-color: white ;
+			          overflow : hidden;
+			      }
+			      body{
+			          width : 100% ;
+			         height : 100% ;
+			          overflow : hidden;
+			      }
+			      #print{
+			         position : absolute ;
+			         width:100%;
+			      }
+			} 
+			@media screen and (orientation: landscape) {
+			       html{
+			         width : 100% ;
+			         height : 100% ;
+			         background-color: white ;
+			      } 
+			       body{
+			          width : 100% ;
+			         height : 100% ;
+			         background-color: white ;
+			      }
+			           #print{
+			            position : absolute ;
+			            top : 0 ; 
+			            left : 0 ;
+			            width : 100% ;
+			            height : 100% ;
+			         }
+			}
+		#print p{margin: auto ;margin-top : 20px ;text-align: center;}
+		input,button,select{outline:none;-webkit-appearance: none;}
+		body{background: #fff;}
+		.iconfont{font-size: 25px;}
+		.h1{text-align: center;font-size: 18px;font-family: "微软雅黑";color:#fff;padding:10px 0;background: #00C2FF;}
+		.h1 s{font-size: 18px;color: #fff;}
+		.h1 a{position: absolute;font-size: 14px;right: 10px;top:15px;}
+		.h1 a span{color: #fff;font-size: 14px;}
+		.h1 button{position: absolute;top:10px;left: 10px;background: none;border: 0px;font-size: 20px;color: #fff;}
+		.div{margin-top: 5%;}
+		.group{text-align: center;margin: 10px;display: flex;align-items: center;position: relative;}
+		/*.group label{width: 15%;}*/
+		.group input{width: 80%;border: 0px;padding: 10px 10px;background-color: #f5f5f5;border-radius: 5px;}
+		#btn{width: 90%;background: #00C2FF;padding: 10px;border: 0px;border-radius: 5px;margin:10% auto;color: #fff;display: block;}
+		#J_getCode{width: 22%;height:44px;display: block;position: absolute;right:5%;line-height: 44px;color:#00C2FF;}
+		#J_resetCode{display:none;width:20%;height:44px;position: absolute;right:5%;line-height: 44px;font-size: 12px;color:#00C2FF;}
+		#J_second{color: #00C2FF;font-size:12px;}
+		.see{position: absolute;right: 5%;width: 6%;}
+		#address_btn{position: absolute;right: 5%;width: 6%;border: none;background: none;}
+	</style>
+	</head>
+	<body class="webpBack">
+	  <div id="print">
+	      <p>lol</p>  
+	    <div class="div">
+			<form action="" method="post">
+				<div class="group">
+					<label class="iconfont icon-dengluyonghu"></label>
+					<input type="text" id="username" value="" placeholder="账号" />
+				</div>
+				<div class="group">
+					<label class="iconfont icon-shouji1"></label>
+					<input type="number" id="phone" value="" reg="phoneReg" placeholder="手机号" />
+				</div>
+				<div class="group">
+					<label class="iconfont icon-securityCode-b"></label>
+					<input type="number" id="code" value="" reg="verificationCodeReg" placeholder="验证码" />
+					<a value="获取验证码" onclick="getCode(this)" id="J_getCode" />获取验证码</a>
+					<a id="J_resetCode"><span id="J_second">60</span>秒后重发</a>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-icon2"></label>
+					<input type="password" id="password" value="" reg="passwordReg" placeholder="登录密码" />
+					<img src="img/nosee.png" class="see"/>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-icon2"></label>
+					<input type="password" id="confir_password" value="" reg="passwordReg" placeholder="确认登录密码" />
+					<img src="img/nosee.png" class="see"/>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-1"></label>
+					<input type="password" id="pay_password" value="" placeholder="交易密码" />
+					<img src="img/nosee.png" class="see"/>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-1"></label>
+					<input type="password" id="confirpay_password" value="" placeholder="确认交易密码" />
+					<img src="img/nosee.png" class="see"/>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-dizhi3"></label>
+					<input type="text" id="address" value="" placeholder="填写地址" />
+					<span id="address_btn" class="iconfont icon-tianjiadizhi"></span>
+				</div>
+				<div class="group">
+					<label class="iconfont icon-tuijian1"></label>
+					<input type="text" id="inviter" value="" placeholder="邀请人" />
+				</div>
+				<input type="button" id="btn" value="确定"/>
+			</form>
+		</div>
+	   </div>
+	</body>
+	<script type="text/javascript">
+		var width = document.documentElement.clientWidth;
+	    var height =  document.documentElement.clientHeight;
+		if( width < height ){
+		      console.log(width + " " + height);
+		      $print =  $('#print');
+		      $print.width(height);
+		       $print.height(width);
+		      $print.css('top',  (height-width)/2 );
+		      $print.css('left',  0-(height-width)/2 );
+		      $print.css('transform' , 'rotate(90deg)');
+		       $print.css('transform-origin' , '50% 50%');
+		 }
+		var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+ 
+    	window.addEventListener(evt, function() {
+        console.log(evt);
+        var width = document.documentElement.clientWidth;
+         var height =  document.documentElement.clientHeight;
+          $print =  $('#print');
+         if( width > height ){
+ 
+            $print.width(width);
+            $print.height(height);
+            $print.css('top',  0 );
+            $print.css('left',  0 );
+            $print.css('transform' , 'none');
+            $print.css('transform-origin' , '50% 50%');
+         }
+         else{
+            $print.width(height);
+            $print.height(width);
+            $print.css('top',  (height-width)/2 );
+            $print.css('left',  0-(height-width)/2 );
+            $print.css('transform' , 'rotate(90deg)');
+            $print.css('transform-origin' , '50% 50%');
+         }
+ 
+    }, false);
+    
+    //获取验证码
+	function getCode(){
+		var phone = $("#phone").val();
+		var pattern = /^1[0-9]{10}$/;
+		var isPhone = 1;
+		if (phone== '') {
+			layer.msg("请输入手机号", { icon: 2,time: 2000});
+            return false;
+            isPhone = 0;
+		}
+		else if(!pattern.test(phone)) {
+			layer.msg("请输入正确手机号", { icon: 2,time: 2000});
+            return false;
+            isPhone = 0;
+		}else{
+			if (isPhone) {
+				$('#J_getCode').hide();
+				$('#J_second').html('60');
+				$('#J_resetCode').show();
+				var second = 60;
+				var timer = null;
+				timer = setInterval(function(){
+					second -= 1;
+					if(second >0 ){
+						$('#J_second').html(second);
+					}else{
+						clearInterval(timer);
+						$('#J_getCode').show();
+						$('#J_resetCode').hide();
+					}
+				},1000);
+			} else{
+				$('#phone').focus();
+			}
+		}
+	}
+
+	/*切换*/
+	var toggle = true;
+	$(".see").click(function() {
+		if(toggle) {
+			$(this).attr("src", "img/see.png");
+			$(this).prev().attr("type", "text");
+			toggle = false;
+		} else {
+			$(this).attr("src", "img/nosee.png");
+			$(this).prev().attr("type", "password");
+			toggle = true;
+		}
+	});
+	
+	$("#confir_password").blur(function(){
+		if ($("#confir_password").val() != $("#password").val()) {
+			layer.msg("两次输入的密码不一致!!!",{icon : 2,time: 2000});
+			$("#confir_password").val("");
+			$("#password").val("");
+		}
+	})
+	
+	$("#confirpay_password").blur(function(){
+		if ($("#confirpay_password").val() != $("#pay_password").val()) {
+			layer.msg("两次输入的密码不一致!!!",{icon : 2,time: 2000});
+			$("#confirpay_password").val("");
+			$("#pay_password").val("");
+		}
+	})
+	
+	$("#btn").click(function(){
+		var username = $("#username").val();
+		var phone = $("#phone").val();
+		var code = $("#code").val();
+		var password1 = $("#password").val();
+		var confir_password = $("#confir_password").val();
+		var pay_password = $("#pay_password").val();
+		var confirpay_password = $("#confirpay_password").val();
+		var address = $("#address").val();
+		var inviter = $("#inviter").val();
+		if (username == '') {
+			layer.msg("请输入帐号", { icon: 2,time: 2000});
+		}else if(phone == ''){
+			layer.msg("请输入手机号", { icon: 2,time: 2000});
+		}else if(code == ''){
+			layer.msg("请输入验证码", { icon: 2,time: 2000});
+		}else if(password1 == ''){
+			layer.msg("请输入登录密码", { icon: 2,time: 2000});
+		}else if(confir_password == ''){
+			layer.msg("请确认登录密码", { icon: 2,time: 2000});
+		}else if(pay_password == ''){
+			layer.msg("请输入交易密码", { icon: 2,time: 2000});
+		}else if(confirpay_password == ''){
+			layer.msg("请输入确认交易密码", { icon: 2,time: 2000});
+		}else if(address == ''){
+			layer.msg("请输入地址", { icon: 2,time: 2000});
+		}else if(inviter == ''){
+			layer.msg("请输入邀请人", { icon: 2,time: 2000});
+		}else{
+			layer.msg("登录成功", { icon: 1,time: 2000});
+		}
+	})
+	</script>
+</html>

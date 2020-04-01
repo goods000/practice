@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="checkbox" id="a" onclick="quan()" />全选
+		<input type="checkbox" id="b" onclick="fan()" />反选
+		<input type="checkbox" name="c" />
+		<input type="checkbox" name="c" />
+		<input type="checkbox" name="c" />
+		<input type="checkbox" name="c" />
+		<input type="checkbox" name="c" />
+		<input type="checkbox" name="c" />
+	</body>
+	<script>
+		function quan(){
+			var a = document.getElementById("a");
+			var c = document.getElementsByName("c");
+			for (var i=0;i<c.length;i++) {
+				c[i].checked=a.checked;
+			}
+		}
+		function fan(){
+			var b = document.getElementById("b");
+			var c = document.getElementsByName("c");
+			for (var i=0;i<c.length;i++) {
+				c[i].checked=!c[i].checked;
+			}
+		}
+	</script>
+</html>

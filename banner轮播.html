@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Keywords" content="">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>banner轮播</title>
+		<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		.banner{
+			width:640px;
+			height:465px;
+			background:#ff0099;
+			margin:150px auto;/*上下外边距150px 左右居中*/
+			position:relative;
+		}
+		.banner .pic{
+			width:640px;
+			height:465px;
+			background:red;
+			position:relative;/*相对定位 参照物*/
+		}
+		.banner .pic ul li{
+			list-style:none;
+			width:640px;
+			height:465px;
+			position:absolute;/*绝对定位*/
+			left:0;top:0;
+			display:none;/*隐藏*/
+		}
+		.banner .num-but{
+			width:150px;
+			height:40px;
+			position:absolute;
+			bottom:0;left:50%;
+			margin-left:-75px;
+		}
+		.banner .num-but ul li{
+			width:20px;
+			height:20px;
+			background:#666;
+			list-style:none;
+			border-radius:50%;
+			float:left;
+			text-align:center;/*文本对齐*/
+			color:#fff;
+			margin:0 3px;
+		}
+		.banner .num-but ul li.red{
+			background:red;
+		}
+		.banner a{
+			color:#fff;
+			text-decoration:none;/*去掉文本下划线*/
+			background:rgba(0,0,0,0.5);
+			font-size:50px;
+			position:absolute;
+			top:50%;
+			margin-top:-25px;
+			display:none;
+		}
+		.banner a.but-l{left:0;}
+		.banner a.but-r{right:0;}
+		</style>
+	</head>
+	<body>
+		<div class="banner">
+			<!--轮播图片-->
+			<div class="pic">
+				<ul>
+					<li style="display:block"><img src="img/11.jpg" /></li>
+					<li><img src="img/22.jpg" /></li>
+					<li><img src="img/33.jpg" /></li>
+					<li><img src="img/44.jpg" /></li>
+					<li><img src="img/55.jpg" /></li>
+				</ul>
+			</div>
+			
+			<!-- 轮播按钮 -->
+			<div class="num-but">
+				<ul>
+					<li class="red">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+				</ul>
+			</div>
+			<!--数字按钮区域 结束-->
+
+			<!--左边箭头按钮-->
+			<a class="but-l" href="javascript:">&lt;</a>
+
+			<a class="but-r" href="javascript:">&gt;</a>
+			<!--右边箭头按钮-->
+		</div>
+		
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script>
+		//鼠标移入 按钮出现 离开消失
+		//jq如何获取对象
+		$(".banner").hover(function(){	//hover:鼠标移入、离开触发事件
+			$(".banner a").show();   //显示
+		},function(){
+			$(".banner a").hide();  //隐藏
+		})
+
+
+		//数字按钮之间的切换
+		var _index = 0;
+		//先找到.banner .num-btn ul li,在给这个对象添加hover事件
+		$(".banner .num-but ul li").hover(function(){  
+			_index = $(this).index();//获取当前序列
+			auto()
+		})
+
+		//轮播函数
+		function auto(){
+			//查找到当前li，添加class样式，其他兄弟元素删除
+			$(".banner .num-but ul li").eq(_index).addClass("red").siblings().removeClass("red");
+			//查找当前li，淡入，其他兄弟元素淡出
+			$(".banner .pic ul li").eq(_index).fadeIn().siblings().fadeOut()
+		}
+		//左边按钮
+		$(".banner a.but-l").click(function(){
+			_index--;
+			if(_index<0){
+				_index = 4
+			}
+			auto()
+		})
+		//右边按钮
+		$(".banner a.but-r").click(function(){
+			_index++;
+			if(_index>4){
+				_index = 0
+			}
+			auto()
+		})
+		//定时器
+		setInterval(function(){
+			_index++;
+			if(_index>4){
+				_index = 0
+			}
+			auto()
+		},3000)
+		</script>
+	</body>
+</html>

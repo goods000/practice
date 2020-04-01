@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>移动端实现文件下载</title>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{padding: 0px;margin: 0px auto;}
+			#app ul{display: grid;margin: 20px auto;}
+			#app ul li{list-style: none;float: left;width: 90%;border: 1px solid #333;padding: 0px 10px;
+			display: flex;flex-direction: row;align-items: center;justify-content: space-between;}
+			#app ul li div{color: #007AFF;}
+			#app ul li div:hover{color: #AA0000;cursor: hand;text-decoration: underline;}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+		    <ul class="file_list">
+		        <li v-for="item in attach">
+		            <p>{{item.name}}</p>
+		            <div class="filebtn" :data-url="item.url" >下载</div>
+		        </li>
+		    </ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vue = new Vue({
+			el:'#app',
+			data:{
+				attach:[
+					{id:1,name:'张三',add:'./img/11.jpg'},
+					{id:2,name:'李四',add:'./img/22.jpg'},
+					{id:3,name:'王五',add:'./img/33.jpg'},
+					{id:4,name:'赵六',add:'./img/44.jpg'},
+				]
+			}
+		})
+		
+        mui.plusReady(function() {
+            $(".file_list").on("tap",".filebtn",function(){
+                var urls = fileUrl + this.getAttribute("data-url");
+                downloadFile(urls);
+            })
+        })
+        /*
+         *下载文件
+         * objId--下载文件的id
+         * downloadUrl--下载路径
+         * */
+        function downloadFile(downloadUrl){
+            plus.nativeUI.showWaiting("正在下载...");
+            var dtask = plus.downloader.createDownload(downloadUrl,{method:"GET"},function(d,status) {
+                // 下载完成
+                if(status == 200) {
+                    plus.nativeUI.closeWaiting();
+                    var index = d.filename .lastIndexOf("\/");  
+                    var  name = d.filename .substring(index + 1, d.filename .length);
+                    /*localStorage.removeItem("fileList");
+                    return;*/
+                    var myDate = new Date();
+                    var file = '{"date":"' + myDate.toLocaleString() + '","id":"' + d.filename + '","name":"' + name + '"}';
+                    var file1 = localStorage.getItem("fileList");
+                    if(file1 != null) { //不是第一次下载文件
+                        //判断是否已经存在
+                        file=file+","+file1;
+                        localStorage.setItem("fileList", file); 
+                        console.log("filealist="+localStorage.getItem("fileList")); 
+                    } else {
+                        var  jsonList=[];
+                        var jsonarray = eval(jsonList);//定义追加格式
+                        jsonarray.push(file);
+                        var files=JSON.stringify(jsonarray);
+                        localStorage.setItem("fileList", file); //第一次下载文件存储字符串
+                    }
+                    var btnArray = ['否', '是']; //弹框消息确认是否打开附件
+                    mui.confirm('是否打开附件查看？', '下载成功', btnArray, function(e) {
+                        if(e.index == 1) { //打开附件
+                            plus.runtime.openFile( d.filename, {}, function(e) {
+                               plus.nativeUI.alert("无法打开此文件");
+                            });
+                        } else { //不打开
+                            return false;
+                        }
+                    })
+                } else {
+                    plus.nativeUI.closeWaiting(true);
+                   plus.nativeUI.toast("下载失败！");
+                }
+            });
+            //dtask.addEventListener( "statechanged", onStateChanged, false );
+            dtask.setRequestHeader("token",localStorage.getItem("token"));
+            dtask.start(); 
+        }
+    </script>
+</html>

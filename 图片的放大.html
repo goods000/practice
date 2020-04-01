@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding: 0px;margin: 0 auto;}
+			.box{padding: 30%;}
+			.box img{width: 100%;border: 1px solid #008000;}
+			.tu_box{background: rgba(0,0,0,0.3);position: absolute;top: 0px;padding:0 10%;height: 100%;display: none;}
+			.tu_box #tu{max-width: 100%;margin:60% auto;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<img src="img/77.jpg" id="img"/>
+		</div>
+		<div class="tu_box">
+			<img src="" id="tu"/>
+		</div>
+	</body>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$("#img").click(function(){
+			var url = $(this).attr("src"); //获取当前点击图片的地址
+			$("#tu").attr('src',url);    //将获取的SRC复制给元素bbb
+			$(".tu_box").show();
+		})
+		$(".tu_box").click(function(){
+			$(this).hide();
+		})
+	</script>
+</html>

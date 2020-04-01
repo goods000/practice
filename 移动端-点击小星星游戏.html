@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>小星星游戏</title>
+</head>
+<style>
+	*{
+		padding: 0px;
+		margin: 0px;
+		font-size: 1rem;
+	}
+    body{
+        background-color: black;
+    }
+    meter{
+        width:100%;
+    }
+
+    #title{
+        width:100%;
+        position: relative;
+        text-align: center;
+        color: #ffffff;
+    }
+    #score{
+        position: absolute;
+        top:0;
+        left:90%;
+        width:10%;
+        color: #ffffff;
+    }
+    #jindu{
+        padding:0 33%;
+    }
+    span{
+        display: block;
+        text-align: center;
+    }
+    span > button{
+        width:20%;
+    }
+</style>
+<body>
+<div><h1 id="title">小星星游戏</h1></div>
+<div><h1 id="score">得分:</h1></div>
+<div id="jindu">
+    <span>
+        <meter id="meter" min="0" max="100"></meter>
+    </span>
+    <span>
+        <button onclick="start()">开始</button>
+        <button onclick="restart()">重玩</button>
+    </span>
+</div>
+<script>
+    var c = 0;
+    function start(){
+        //console.log("调用");
+        //周期的调用函数，0.2s
+         t1 = window.setInterval(show,200)
+    }
+    var meter = document.getElementById("meter");
+    meter.value=0;
+    var j =0;
+    function show(){
+        meter.value+=5;
+        // console.log(meter.value)
+        if(j<=meter.value){
+            j=meter.value;
+        }else{
+            window.clearInterval(t1)
+        }
+        if(j==100){
+            j=101;
+            alert("游戏结束,共消除了"+c+"个小星星");
+            window.clearInterval(t1)
+        }
+        var img = document.createElement('img');
+        img.src='xxx.png';
+        img.style.position="absolute";
+        //math.floor向下取整
+        var w = Math.floor(Math.random()*(100-20+1)+20);
+        var l = Math.floor(Math.random()*(1500-20+1)+20);
+        var t = Math.floor(Math.random()*(600-150+1)+150);
+        img.width = w;
+        img.style.top = t+"px";
+        img.style.left = l+"px";
+        document.body.appendChild(img);
+        img.onclick =rem;
+    }
+    function rem() {
+        //通过父元素删除子节点
+        this.parentNode.removeChild(this);
+        var score= document.getElementById("score")
+        if(meter.value!=100){
+            meter.value-=8;
+            j-=8;
+            c++;
+            score.innerText="得分:"+c;
+        }
+    }
+    function restart(){
+        //重新载入当前文档
+        location.reload();
+    }
+
+</script>
+</body>
+</html>

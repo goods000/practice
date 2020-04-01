@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>jquery实现进度条</title>
+<style type="text/css">
+body{
+　　padding:30px;
+　　margin-left:450px;
+　　margin-top:200px;
+　　width:350px;
+　　border: 1px solid #98AFB7;
+}
+.progressBar{
+　　width:280px;
+　　height:20px;
+　　border: 1px solid #98AFB7;
+　　border-radius:8px;
+　　background:#e1dfdf;
+}
+input{
+　　margin-bottom:15px;
+}
+span{
+　　position:relative;
+　　top:-20px;
+　　left:290px;
+}
+#bar {
+　　width: 0px;
+　　height: 20px;
+　　border-radius: 7px;
+　　background: #5EC4EA;
+}
+</style>
+
+//引入Jquery文件
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+function progressBar() {
+　　$("#bar").css("width", "0px");
+　　var speed =20;//进度条的速度
+
+　　bar = setInterval(function () {
+　　nowWidth = parseInt($("#bar").width());
+　　if (nowWidth <= 279) {
+　　　　var barWidth = (nowWidth + 1);
+　　　　$("#bar").css("width", barWidth + "px");
+　　　　var totla = parseInt($(".progressBar").width())
+　　　　var ss = barWidth / totla * 100;
+
+　　　　$("#span_s").text(ss);
+　　　　var index = $("#span_s").text().indexOf(".");
+　　　　if (index != -1) {
+　　　　　　var context = $("#span_s").text().substring(0, index);
+　　　　　　$("#span_s").text(context);
+　　　　}
+　　　　else {
+　　　　　　$("#span_s").text(ss);
+　　　　　　if (parseInt($("#span_s").text()) == 100) {
+　　　　　　alert('完成');
+　　　　　　}
+　　　　} 
+　　} else {
+　　　　　　clearInterval(bar);
+　　　　}
+　　}, speed);
+}
+</script>
+
+
+</head>
+<body>
+　　<input type="button" value="开始" onclick="progressBar()" />
+　　<div class="progressBar"><div id="bar"></div></div><span id="span_s">0</span><span>%</span>
+</body>
+</html>

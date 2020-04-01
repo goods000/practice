@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		/*文本框中placeholder的提示性文字的样式修改*/
+		::-webkit-input-placeholder { color:#f00; }   
+		::-moz-placeholder { color:#f00; } /* firefox 19+ */  
+		:-ms-input-placeholder { color:#f00; } /* ie */  
+		input:-moz-placeholder { color:#f00; }  
+	</style>
+	<body>
+		<div class="">
+			<input type="checkbox" checked="checked" onclick="remember(obj)" id="" value="1" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		function remember(obj){
+			if ($obj.is(':checked')) {
+				$obj.val(1);
+			} else{
+				$obj.val(0);
+			}
+		}
+	</script>
+</html>

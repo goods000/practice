@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>数据交互</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<video width="100%" height="">
+			<source src="" type="video/mp4"></source>
+		</video>
+		
+		<div id="box">
+			<div class="">
+				<P><span>商品编号:</span><span id="id"></span></P>
+				<P><span>商品名称:</span><span id="name"></span></P>
+				<P><span>商品图片:</span>
+				<img src="" id="img"/></P>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var SERVER = "http://www.lepofind.com";
+		/*$.ajax({
+			type:"POST",
+			url:SERVER + "/shipinfiindAllByid?shipin_biaoqian_id=1",
+			async:true,
+			dataType: "JSON",
+//			jsonpCallback: "handleCallback",  //关键：回调函数名，与后端一致
+			success:function(data){
+				var video = $("video");
+				var source = '<source src='+ data.data[0].shipinurl +' type="video/mp4">'
+				video.append(source);
+			},
+			error:function(data){
+				console.log(data);
+				console.log("网络请求异常，请重试！！！");
+			}
+		});*/
+		
+		var tupianid = $("#id").html();
+		var tupianname = $("#name").html();
+		var tupianurl = $("#img").attr('src');
+		$.ajax({
+			type:"POST",
+			url:SERVER + "/tupianfindAllByid?biaoqian_neirong_id=4",
+			async:true,
+			data:{
+				tupianid : tupianid,
+				tupianname : tupianname,
+				tupianurl : tupianurl,
+			},
+			success:function(data){
+				if (data.code == 0) {
+					console.log(data.data);
+				} else{
+					console.log("报错。。。。");
+				}
+			},
+			error:function(data){
+                console.log(data);
+                console.log("error");
+            }
+		});
+	</script>
+</html>

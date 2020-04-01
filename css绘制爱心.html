@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css画爱心</title>
+    <style>
+        .heart {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            margin: 100px auto;
+            animation: size 1s infinite;
+            animation-direction: alternate;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            left: -90px;
+        }
+
+        .heart::after {
+            top: -90px;
+        }
+
+        @keyframes size {
+            0% {
+                transform: scale(0.6) rotate(45deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(45deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heart"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>原生JS实现匀速图片轮播动画</title>
+	</head>
+	<style type="text/css">
+		.slider ul.imgs{height:453px;width:4380px;position:absolute;}
+		.slider ul.imgs li{display:block; width:730px;height:453px;float:left;}
+		.slider .circle{position:absolute;left:50%;bottom:8px;}
+		.slider .circle li{cursor:pointer;float:left;width:18px;height:18px;margin:4px;background-color:#3e3e3e;border-radius: 50%;text-align: center;color:#fff;}
+		.slider .circle li.current{background:pink;color:white;}
+	</style>
+	<body>
+		<div class="w main clearfix">
+			<!--主内容部分开始-->
+			<div class="slider">
+				<!--轮播图部分开始-->
+				<ul class="imgs" id="slider_imgs">
+					<li><img src="img/11.jpg" id="slider1" alt="" />
+					</li>
+					<li><img src="img/22.jpg" id="slider2" alt="" />
+					</li>
+					<li><img src="img/33.jpg" id="slider3" alt="" />
+					</li>
+					<li><img src="img/44.jpg" id="slider4" alt="" />
+					</li>
+					<li><img src="img/55.jpg" id="slider5" alt="" />
+					</li>
+					<li><img src="img/66.jpg" id="slider0" alt="" />
+					</li>
+				</ul>
+				<div class="arrow" id="arrow">
+					<a href="javascript:;" class="arrow_1">
+						<</a>
+							<a href="javascript:;" class="arrow_2">></a>
+				</div>
+			</div>
+			<!--轮播图部分结束-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*1.这是匀速动画函数的封装*/
+		/*
+		 ***obj:做动画的DOM对象
+		 ***target:对象最终运动到的目标位置（X轴）
+		 */
+		function animate(obj, target) {
+			//每次调用要先清定时器
+			clearInterval(obj.Timer);
+			//根据目标位置判断移动的方向，每到目标位置步长为20，否则为-20
+			var speed = target > obj.offsetLeft ? 20 : -20;
+			obj.Timer = setInterval(function() {
+				var left = obj.offsetLeft;
+				obj.style.left = left + speed + "px";
+				var result = target - left;
+				//目标位置与当前位置在步长20以内，则到达目标位置
+				if(Math.abs(result) <= 20) {
+					//停止运动
+					clearInterval(obj.Timer);
+					//有20像素差距 我们直接跳转目标位置
+					obj.style.left = target + "px";
+				}
+			});
+		}
+		
+		/*2.轮播图封装函数*/
+		function slider() {
+			//焦点图信息DOM节点
+			var imgs = document.getElementById("slider_imgs");
+			var slides = imgs.parentNode;
+			var lis = imgs.getElementsByTagName("li");
+			var arrows = document.getElementById("arrow");
+			var arrowLink = arrows.children;
+			//创建小圆点
+			var circle = document.createElement("ol");
+			circle.setAttribute("class", "circle");
+			imgs.parentNode.appendChild(circle);
+		
+			for(var i = 0, len = lis.length - 1; i < len; i++) {
+				var li = document.createElement("li");
+				li.innerHTML = i + 1;
+				circle.appendChild(li);
+			}
+			//marginLeft=-imgli(length)*olLi(width)/2
+			circle.style.marginLeft = (-13 * len) + "px";
+			var olLis = circle.children;
+		
+			olLis[0].className = "current";
+			//为小圆点添加鼠标事件
+			for(var i = 0; i < olLis.length; i++) {
+				//当前小圆点索引
+				olLis[i].index = i;
+				olLis[i].onmouseover = function() {
+		
+					for(var j = 0; j < olLis.length; j++) {
+						olLis[j].className = "";
+					}
+					this.className = "current";
+					//图片切换 imgs的CSS部分加上定位
+					animate(imgs, this.index * (-lis[0].offsetWidth));
+					//当鼠标挪到定时器，当前播放图片与原点位置回原
+					k = z = p = q = this.index;
+		
+				};
+		
+			}
+		
+			//鼠标移动到轮播图，不定时播放
+			slides.onmouseover = function() {
+				//清除自动轮播定时器
+				clearInterval(Time);
+			};
+			//鼠标移开，自动轮播    
+			slides.onmouseout = function() {
+				Time = setInterval(autoPlay, 1000);
+			};
+			//定时器部分   
+			var Time = null,
+				k = 0,
+				z = 0;
+			Time = setInterval(autoPlay, 1000);
+			//自动轮播图片，定时器Time
+			function autoPlay() {
+				k++;
+				if(k > lis.length - 1) {
+					imgs.style.left = 0;
+					k = 1;
+				}
+				animate(imgs, k * (-lis[0].offsetWidth));
+				z++;
+				if(z > olLis.length - 1) {
+					z = 0;
+				}
+				for(var j = 0; j < olLis.length; j++) {
+					olLis[j].className = "";
+				}
+				olLis[z].className = "current";
+			}
+			var q = 0;
+			var p = 0;
+			arrowLink[1].onclick = function() {
+				q++;
+				if(q > lis.length - 1) {
+					imgs.style.left = 0;
+					q = 1;
+				}
+				p++;
+				if(p > olLis.length - 1) {
+					p = 0;
+				}
+				for(var j = 0; j < olLis.length; j++) {
+					olLis[j].className = "";
+				}
+				olLis[p].className = "current";
+				animate(imgs, q * (-lis[0].offsetWidth));
+			}
+		
+		}</script>
+</html>

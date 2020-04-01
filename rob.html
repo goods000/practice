@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>抢购</title>
+		<link rel="stylesheet" href="css/style.css" />
+    	<link rel="stylesheet" href="css/font.css" />
+    	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body style="background: #03161d;">
+		<h1 class="h1"><button class="iconfont icon-xiangzuo1" onclick="javascript:window.history.back(-1);"></button>抢购<a href="rob_record.html">抢购记录</a></h1>
+		<div class="time_box">
+			<p class="time_title">抢购结束倒计时</p>
+			<div class="time-wr">
+				<span id="time-h" class="time-h">00</span> <span class="time-point">时</span> 
+				<span id="time-m" class="time-m">00</span> <span class="time-point">分</span>
+				<span id="time-s" class="time-s">00</span> <span class="time-point">秒</span>
+			</div>	
+		</div>
+		<div class="bag_box">
+			<img src="img/startimg.png" class="bag_img"/>
+			<img src="img/start.png" id="start" class="start_img"/>
+			<div class="num_box">
+				<p>
+					<span class="num_title">今日限量份数:</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+					<span class="num">9</span>
+				</p>
+				<div class="progress">
+				    <span></span>
+				</div>
+				<div class="fen">
+					<span class="fen_title">已经售21000000份</span>
+					<span class="fen_title">剩余100000份</span>
+				</div>
+			</div>
+		</div>
+		<div class="gui"><a href="rob_rule.html">抢购规则</a></div>
+		
+		<!--获得红包模态框 -->
+		<div class="motai" id="mo">
+			<img src="img/close.png" class="close" id="close"/>
+			<div class="i_box">
+				<p class="bag_title">恭喜获得股权红包</p>
+				<p class="ti_tilte">·您本次抢到红包金额为·</p>
+				<p class="red_bag">1000</p>
+				<p class="btn_img">存入股权钱包</p>
+				<img src="img/bag.png" id="real" alt="model test picture">
+			</div>
+		</div>
+		
+		<!--未获得红包模态框 -->
+		<div class="motai" id="mo1">
+			<img src="img/close.png" class="close" id="close1"/>
+			<div class="i_box">
+				<p class="bag_title1">未能获得红包</p>
+				<p class="ti_tilte">·红包已抢完，请下次再来·</p>
+				<img src="img/nobag.png" id="real1" alt="model test picture">
+			</div>
+		    
+		</div>
+	</body>
+<script>
+	//进度条
+	var count = 0;
+	$(".num").each(function(){
+		count +=+ $(this).html();
+	})
+	
+    ~function (document) {
+        var progress = document.getElementsByClassName('progress')[0];
+        var span = progress.getElementsByTagName('span')[0];
+        span.style.width = span.textContent =  count + '%';
+//      span.style.width = span.textContent =  (count / 100).toFixed(1) + '%';
+    }(document)
+</script>
+<script>
+    var start=document.getElementById('start');
+    var motai=document.getElementById('mo');
+    var motai1=document.getElementById('mo1');
+    start.onclick=function(){
+    	var index = layer.load(2, {time: 5000});
+		(function(){
+			window.setTimeout(function(){
+				motai.style.display="block";
+			},5000)
+		})();
+    }
+    
+    var span=document.getElementById("close");
+    var close=document.getElementById("close1");
+
+    span.onclick=function(){
+        motai.style.display="none";
+        motai1.style.display="block";
+    }
+    close.onclick=function(){
+        motai1.style.display="none";
+        document.getElementById("start").src="img/end.png";
+    }
+</script>
+<script type="text/javascript">
+window.onload=clock;
+function clock(){
+var today=new Date(),//当前时间
+    h=today.getHours(),
+    m=today.getMinutes(),
+    s=today.getSeconds();
+  var stopTime=new Date("Feb 9 2020 00:00:00"),//结束时间
+    stopH=stopTime.getHours(),
+    stopM=stopTime.getMinutes(),
+    stopS=stopTime.getSeconds();
+  var shenyu=stopTime.getTime()-today.getTime(),//倒计时毫秒数
+    shengyuD=parseInt(shenyu/(60*60*24*1000)),//转换为天
+    D=parseInt(shenyu)-parseInt(shengyuD*60*60*24*1000),//除去天的毫秒数
+    shengyuH=parseInt(D/(60*60*1000)),//除去天的毫秒数转换成小时
+    H=D-shengyuH*60*60*1000,//除去天、小时的毫秒数
+    shengyuM=parseInt(H/(60*1000)),//除去天的毫秒数转换成分钟
+    M=H-shengyuM*60*1000;//除去天、小时、分的毫秒数
+    S=parseInt((shenyu-shengyuD*60*60*24*1000-shengyuH*60*60*1000-shengyuM*60*1000)/1000)//除去天、小时、分的毫秒数转化为秒
+    shengyuH = checkTime(shengyuH);
+    shengyuM = checkTime(shengyuM);
+    S = checkTime(S);
+    document.getElementById("time-h").innerHTML=shengyuH
+	document.getElementById("time-m").innerHTML=shengyuM
+	document.getElementById("time-s").innerHTML=S
+    setTimeout(clock,500);
+}
+ function checkTime(i) { //将0-9的数字前面加上0，例1变为01 
+	 if(i < 10) {
+	  i = "0" + i;
+	 }
+	 return i;
+ }
+</script>
+</html>

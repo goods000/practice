@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		*{margin: 0px;padding: 0px;font-size: 14px;color: #fff;font-family: "microsoft yahei";list-style: none;text-decoration: none;}
+		input,button,select{outline:none;-webkit-appearance: none;}
+		.h1{text-align: center;font-weight: 500;font-size: 20px;padding:10px 0;background: #000;}
+		.h1 span{font-size: 20px;}
+		.h1 s{font-size: 18px;color: #fff;}
+		.h1 a{position: absolute;font-size: 14px;right: 10px;top:15px;width: 80px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
+		.h1 a span{color: #fff;font-size: 14px;}
+		.h1 button{position: absolute;top:13px;left: 10px;background: none;border: 0px;font-size: 20px;color: #fff;}
+		
+	</style>
+	<body>
+		<!--头部-->
+		<h1 class="h1"><button class="iconfont icon-xiangzuo1" onclick="javascript:window.history.back(-1);"></button>
+			<span>上拉加载下拉刷新</span>
+		</h1>
+		<!--商品列表-->
+		<body>
+			<div class="">
+				<img src="img/3.png"/>
+				<div class="">
+					<p>区域讲解</p>
+					<p>选择景区购物车</p>
+				</div>
+				<div>确定</div>
+			</div>
+		</body>
+		
+	</body>
+	<script type="text/javascript">
+		//	 //获取滚动条当前的位置
+		//  function getScrollTop() {
+		//      var scrollTop = 0;
+		//      if (document.documentElement && document.documentElement.scrollTop) {
+		//          scrollTop = document.documentElement.scrollTop;
+		//      } else if (document.body) {
+		//          scrollTop = document.body.scrollTop;
+		//      }
+		//      return scrollTop;
+		//  }
+		// 
+		//  //获取当前可视范围的高度
+		//  function getClientHeight() {
+		//      var clientHeight = 0;
+		//      if (document.body.clientHeight && document.documentElement.clientHeight) {
+		//          clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+		//      } else {
+		//          clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+		//      }
+		//      return clientHeight;
+		//  }
+		// 
+		//  //获取文档完整的高度
+		//  function getScrollHeight() {
+		//      return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+		//  }
+		//  
+		//  var pageNum = 1;
+		//  var sign = true;
+		//  $(function(){
+		//      getListFuc();
+		//      $(window).scroll(function() {
+		//          if (getScrollTop() + getClientHeight() === getScrollHeight()) {
+		//              pageNum++;
+		//              if(sign){
+		//                  sign = false;
+		//                  getListFuc();
+		//              }
+		//          }
+		//      });
+		//  });  
+	</script>
+</html>

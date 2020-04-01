@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>定时器</title>
+	</head>
+	<body>
+		<h2 id="time"></h2>
+	</body>
+	<script type="text/javascript">
+//		var date = new Date();
+//		var time = date.getTime();
+//		console.log(time);
+//		var year = date.getFullYear();
+//		console.log(year);
+//		var month = date.getMonth()+1;
+//		console.log(month);
+//		var day = date.getDate();
+//		console.log(day);
+//		var hour = date.getHours();
+//		console.log(hour);
+//		var minutes = date.getMinutes();
+//		console.log(minutes);
+//		var miao = date.getSeconds();
+//		console.log(miao);
+//		var h_miao = date.getMilliseconds();
+//		console.log(h_miao);
+//		var weak = date.getDay();
+//		console.log(weak);
+
+		function time(){
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = ((date.getMonth()+1) <10) ? ("0"+(date.getMonth()+1)) : (date.getMonth()+1);
+			var day = (date.getDate()) <10 ? ("0"+(date.getDate())) : date.getDate();
+			var hour = (date.getHours()) <10 ? ("0"+(date.getHours())) : date.getHours();
+			var minutes = (date.getMinutes()) <10 ? ("0"+(date.getMinutes())) : date.getMinutes();
+			var miao = (date.getSeconds()) <10 ? ("0"+(date.getSeconds())) : date.getSeconds();
+			var weak = date.getDay();
+			var time = year+"年"+month+"月"+day+"日"+hour+"时"+minutes+"分"+miao+"秒"+"星期"+weak;
+			console.log(time);
+			document.getElementById("time").innerHTML=time;
+		}
+		window.setInterval(time,1000);
+
+
+	</script>
+</html>

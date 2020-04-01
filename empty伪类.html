@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>:empty伪类</title>
+		<style type="text/css">
+			*{margin: 0px;padding: 0px;color: #6982A3;font-size: 1rem;}
+			.box{width: 80%;margin: auto;background: #131F30;border-radius: 8px;margin-bottom: 5%;}
+			.box ul li{display: flex;flex-direction: row;align-items: center;justify-content: space-between;
+			border-bottom: 1px solid #1D2B3E;padding: 10px 15px;}
+			.box ul li div.info_box{font-size: 0.8rem;color: #6982A3;overflow: hidden;text-overflow: ellipsis;text-align: center;}
+			.box ul li .info_box:empty::before{
+				content: '暂无数据';
+				color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li>
+					<div class="info_box">排名</div>
+					<div class="info_box">业绩TOP20会员</div>
+					<div class="info_box">竞赛业绩</div>
+				</li>
+				<li>
+					<div class="info_box">1ST</div>
+					<div class="info_box">0cf9566e......fa382624</div>
+					<div class="info_box">716767</div>
+				</li>
+				<li>
+					<div class="info_box">2ND</div>
+					<div class="info_box">0x62380......ff9573e8</div>
+					<div class="info_box">49756</div>
+				</li>
+				<li>
+					<div class="info_box">3RD</div>
+					<div class="info_box">0xc6f96......fdd05494</div>
+					<div class="info_box">215444</div>
+				</li>
+				<li>
+					<div class="info_box">4DC</div>
+					<div class="info_box">0xc6f96......fdd05494</div>
+					<div class="info_box">215444</div>
+				</li>
+				<li>
+					<div class="info_box">5RD</div>
+					<div class="info_box">0xc6f96......fdd05494</div>
+					<div class="info_box">215444</div>
+				</li>
+				<li>
+					<div class="info_box">6RD</div>
+					<div class="info_box"></div>
+					<div class="info_box">215444</div>
+				</li>
+				<li>
+					<div class="info_box">7RD</div>
+					<div class="info_box">0xc6f96......fdd05494</div>
+					<div class="info_box">215444</div>
+				</li>
+			</ul>
+		</div>
+		<div class="info">
+			<form>
+				输入0—100之间的数字：
+				<input type="range" name="inputNum3" min="1" max="100" value="30"/><br/><br/>
+				输入10-50之间的数字(步长为2)：
+				<input type="number" name="inputNum2" min="10" max="50" step="2" />
+			</form>
+			<form>
+				选择颜色：
+				<input type="color" name="select_color" />
+				<input type="submit"/>
+			</form>
+			<form>
+			 	<fieldset>
+				   	<legend>pattern属性：</legend>
+					输入用户名:
+				   	<input name="txtAge" type="text" pattern="^[a-zA-Z]\w{6,8}$" />
+				   	<input name="frmSubmit" type="submit" value="提交" />
+				    <br/>以字母开头,包含字符或数字和下划线,长度在6~8之间 
+			 	</fieldset>
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>textarea文本字体限制</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		*{margin: 0 auto;padding: 0px;}
+		input,textarea{outline: none;-webkit-appearance: none;}
+		.h1{text-align: center;font-weight: 500;font-size: 16px;font-family: "微软雅黑";color:#fff;padding:10px 0;background: #1E2134;}
+		.h1 a{position: absolute;font-size: 14px;right: 10px;top:15px;}
+		.h1 a span{color: #fff;font-size: 14px;}
+		.h1 button{position: absolute;top:10px;left: 10px;background: none;border: 0px;font-size: 20px;color: #fff;}
+		form{margin: 15px; padding: 10px;position: relative;}
+		.form textarea{width: 100%;height: 35px;line-height: 35px;position: relative;padding:0 5px;}
+		#length-note{position: absolute;right: 5%;top: 11%;}
+		#btn{width: 100%;background: #080808;border-radius: 5px;color: #fff;height: 35px;line-height: 35px;border: none;margin: 10% auto;}
+	</style>
+	<body>
+		<h1 class="h1">文本</button></h1>
+		<form action="" method="post">
+			<div class="form">
+				<textarea id="content" placeholder="请输入昵称" name="" rows="" cols=""></textarea>
+				<div id="length-note">
+					<label id="now-length">10</label>/<span class="big">10</span> 
+				</div>
+			</div>
+			<input type="submit" value="提交" id="btn"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+		var content = document.getElementById("content");
+		var nowlength = document.getElementById("now-length");
+		var sub = document.getElementById("btn");
+		var titlenote = document.getElementById("title-note");
+		var maxlength = 10;
+		function checkTextLength() {
+			var nowlen = maxlength - content.value.length;
+			if (nowlen < 0) {
+				nowlength.style.color = "red";
+				sub.disabled = true;
+			} else {
+				if (nowlen <= 10) {
+					sub.disabled = false;
+				} else {
+					sub.disabled = true;
+				}
+				nowlength.style.color = "#aaa";
+			}
+			nowlength.innerHTML = nowlen;
+		}
+		function checkTitle() {
+			var nowlen = maxlength - content.value.length;
+	
+			if (nowlen <= 10) {
+				sub.disabled = false;
+			}
+			titlenote.innerHTML = "";
+		}
+		content.onkeyup = checkTextLength;
+	</script>
+	<script type="text/javascript">
+		public boolean equals(Object anObject){
+			if(this == anObject){
+				return true;
+			}
+			if (anObject instanceof String) {
+				String anotherString = (String)anObject;
+				int n = value.length;
+				if (n == anotherString.vlaue.length) {
+					char v1[] = value;
+					vhar v2[] = anotherString.value;
+					int i = 0;
+					while (n-- != 0){
+						if (v1[i] != v2[i]) {
+							return false;
+							i++;
+						}
+					}
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		//String类只是封装字符串的一些操作的，正式的字符串就是存在其下value这个字符数组中。
+		//而String.length()的内部实现就是value.length，所以这里直接使用value的长度，不用调用String.length()，也避免了调用方法多余的开销。
+		
+	</script>
+</html>

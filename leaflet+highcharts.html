@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	</head>
+	<body>
+		<div class="">
+			<label>项目</label>
+			<input type="text" name="" id="" value="" placeholder="<span data-lang="">请输入你的项目名称</span>" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var barChartLayer = new L.LayerGroup();
+		// markers、 result 、lat 、lng 、 这些数据 在本文中 根据需求自定义
+			for(var i = 0,len = markers.length; i < len; i++){
+			// 定义一个marker来装载highcharts 柱状图 
+			var pictures = L.marker([lat, lng], {
+			    icon: L.divIcon({
+			        className: 'leaflet-echart-icon',
+			        iconSize: [160, 200],
+			        html: '<div id="marker' + i + '" style="width: 160px; height: 200px; bottom: '+bottom+'px; position: relative; background-color: transparent;"></div>'
+			    })
+			});
+			barChartLayer .addLayer(pictures);
+			map.addLayer(barChartLayer );
+			var markerId = $("#marker"+i);
+			// 由于是在地图中显示  可能不同地方都会显示 所以把title x y 轴刻度都隐藏了 用户可自定义
+			$(markerId).highcharts({
+			    chart: {
+			        type: 'column',
+			        backgroundColor: 'rgba(0,0,0,0)' // 设置图标的背景为透明
+			    },
+			    credits: {
+			        enabled:false
+			    },
+			    exporting: {
+			        enabled:false
+			    },
+			    title: {
+			        text: ''
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    xAxis: {
+			        categories: [
+			            ''
+			        ],
+			        crosshair: true
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ''
+			        },
+			        labels: {
+			            enabled: false
+			        },
+			        gridLineWidth: 0
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding:0.2,
+			            borderWidth: 0,
+			            dataLabels: {
+			                enabled: true
+			            }
+			        },
+			        bar: {
+			            dataLabels: {
+			                enabled: true
+			            }
+			        },
+			        series: {
+			            showInLegend: false
+			        }
+			    },
+			    series:result
+			 });
+		}
+	</script>
+</html>
